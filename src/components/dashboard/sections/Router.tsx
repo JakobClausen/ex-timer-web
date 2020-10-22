@@ -1,10 +1,11 @@
 import { Box } from "@chakra-ui/core";
 import React from "react";
 import { Route } from "react-router-dom";
+import { WhiteboardContainer } from "./whiteboard/WhiteboardContainer";
 
-interface ScheduleDashProps {}
+interface InputSectionProps {}
 
-export const ScheduleDash: React.FC<ScheduleDashProps> = () => {
+export const InputSection: React.FC<InputSectionProps> = () => {
   return (
     <Box
       w="85%"
@@ -16,7 +17,7 @@ export const ScheduleDash: React.FC<ScheduleDashProps> = () => {
         <h1>schedule</h1>
       </Route>
       <Route path="/dashboard/whiteboard">
-        <h1>whiteboard</h1>
+        <WhiteboardContainer />
       </Route>
     </Box>
   );
