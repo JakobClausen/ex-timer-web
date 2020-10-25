@@ -1,6 +1,6 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import "./Login.css";
+
 import { MeDocument, MeQuery, useLoginMutation } from "../../generated/graphql";
 import { toErrorMap } from "../../utils/toErrorMap";
 import { Link, useHistory } from "react-router-dom";
@@ -14,7 +14,7 @@ const Login: React.FC<loginProps> = () => {
   const history = useHistory();
 
   return (
-    <div className="form-container">
+    <Box m="40px" h="100%">
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -53,7 +53,7 @@ const Login: React.FC<loginProps> = () => {
               label="Password"
               type="password"
             />
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button mt="10px" type="submit" isLoading={isSubmitting}>
               Log in
             </Button>
           </Form>
@@ -74,7 +74,7 @@ const Login: React.FC<loginProps> = () => {
           </Link>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

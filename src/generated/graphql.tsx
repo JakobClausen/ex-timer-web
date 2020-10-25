@@ -14,22 +14,55 @@ export type Scalars = {
 export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
-  users: Array<User>;
-  user?: Maybe<User>;
+  getUser: User;
+  getWhiteboard: Array<Whiteboard>;
 };
 
 
-export type QueryUserArgs = {
-  id: Scalars['Int'];
+export type QueryGetUserArgs = {
+  id: Scalars['Float'];
 };
 
 export type User = {
   __typename?: 'User';
-  id: Scalars['Int'];
-  createdAt: Scalars['String'];
-  updatedAt: Scalars['String'];
+  id: Scalars['Float'];
   email: Scalars['String'];
   username: Scalars['String'];
+  whiteboards: Array<Whiteboard>;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type Whiteboard = {
+  __typename?: 'Whiteboard';
+  id: Scalars['Float'];
+  date: Scalars['String'];
+  user_id: Scalars['Float'];
+  user: User;
+  programming_rows: Array<ProgrammingRow>;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type ProgrammingRow = {
+  __typename?: 'ProgrammingRow';
+  id: Scalars['Float'];
+  title: Scalars['String'];
+  markdown: Scalars['String'];
+  whiteboard_id: Scalars['Float'];
+  category_id: Scalars['Float'];
+  whiteboard: Whiteboard;
+  category: Category;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Float'];
+  category: Scalars['String'];
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
 };
 
 export type Mutation = {
@@ -40,6 +73,8 @@ export type Mutation = {
   login: UserResponse;
   logout: Scalars['Boolean'];
   updateUser?: Maybe<UserResponse>;
+  createWhiteboard: Scalars['Boolean'];
+  createCategory: Category;
 };
 
 
@@ -66,6 +101,16 @@ export type MutationLoginArgs = {
 
 export type MutationUpdateUserArgs = {
   data: UpdateUser;
+};
+
+
+export type MutationCreateWhiteboardArgs = {
+  data: WhiteboardInput;
+};
+
+
+export type MutationCreateCategoryArgs = {
+  data: CategoryInput;
 };
 
 export type UserResponse = {
@@ -98,6 +143,23 @@ export type UpdateUser = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type WhiteboardInput = {
+  day: Scalars['String'];
+  category: Scalars['Int'];
+  one: RowField;
+  two: RowField;
+  three: RowField;
+};
+
+export type RowField = {
+  title: Scalars['String'];
+  workout: Scalars['String'];
+};
+
+export type CategoryInput = {
+  category: Scalars['String'];
+};
+
 export type RegularUserFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'email' | 'username'>
@@ -126,6 +188,16 @@ export type ChangePasswordMutation = (
       & RegularUserFragment
     )> }
   ) }
+);
+
+export type CreateWhiteboardMutationVariables = Exact<{
+  data: WhiteboardInput;
+}>;
+
+
+export type CreateWhiteboardMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'createWhiteboard'>
 );
 
 export type ForgotPasswordMutationVariables = Exact<{
@@ -250,6 +322,36 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const CreateWhiteboardDocument = gql`
+    mutation CreateWhiteboard($data: WhiteboardInput!) {
+  createWhiteboard(data: $data)
+}
+    `;
+export type CreateWhiteboardMutationFn = Apollo.MutationFunction<CreateWhiteboardMutation, CreateWhiteboardMutationVariables>;
+
+/**
+ * __useCreateWhiteboardMutation__
+ *
+ * To run a mutation, you first call `useCreateWhiteboardMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateWhiteboardMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createWhiteboardMutation, { data, loading, error }] = useCreateWhiteboardMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateWhiteboardMutation(baseOptions?: Apollo.MutationHookOptions<CreateWhiteboardMutation, CreateWhiteboardMutationVariables>) {
+        return Apollo.useMutation<CreateWhiteboardMutation, CreateWhiteboardMutationVariables>(CreateWhiteboardDocument, baseOptions);
+      }
+export type CreateWhiteboardMutationHookResult = ReturnType<typeof useCreateWhiteboardMutation>;
+export type CreateWhiteboardMutationResult = Apollo.MutationResult<CreateWhiteboardMutation>;
+export type CreateWhiteboardMutationOptions = Apollo.BaseMutationOptions<CreateWhiteboardMutation, CreateWhiteboardMutationVariables>;
 export const ForgotPasswordDocument = gql`
     mutation ForgotPassword($email: String!) {
   forgotPassword(email: $email)

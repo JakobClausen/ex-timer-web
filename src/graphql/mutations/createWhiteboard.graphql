@@ -1,0 +1,3 @@
+mutation CreateWhiteboard($data: WhiteboardInput!) {
+  createWhiteboard(data: $data)
+}

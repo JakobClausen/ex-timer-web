@@ -1,6 +1,5 @@
 import React from "react";
 import { Formik, Form } from "formik";
-import "./Login.css";
 import {
   MeDocument,
   MeQuery,
@@ -18,7 +17,7 @@ const Register: React.FC<RegisterProps> = () => {
   const history = useHistory();
 
   return (
-    <div className="form-container">
+    <Box m="40px" h="100%">
       <Formik
         initialValues={{ email: "", username: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -66,7 +65,9 @@ const Register: React.FC<RegisterProps> = () => {
               label="Password"
               type="password"
             />
-            <Button type="submit">Sign up</Button>
+            <Button mt="10px" type="submit">
+              Sign up
+            </Button>
           </Form>
         )}
       </Formik>
@@ -85,7 +86,7 @@ const Register: React.FC<RegisterProps> = () => {
           </Link>
         </Box>
       </Box>
-    </div>
+    </Box>
   );
 };
 

@@ -1,26 +1,32 @@
 import React from "react";
-import "./App.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { Dashboard } from "./components/dashboard/Dashboard";
+import { DashboardPage } from "./components/dashboardPage/DashboardPage";
 import { ChangePassword } from "./components/auth/changePassword";
-import { FirstPage } from "./components/FirstPage";
+import { AuthPage } from "./components/authPage/AuthPage";
+import { Flex } from "@chakra-ui/core";
 
 interface appProps {}
 
 const App: React.FC<appProps> = () => {
   return (
     <Router>
-      <div className="App">
+      <Flex
+        w="100%"
+        bg="darkBlue"
+        justifyContent="center"
+        alignItems="center"
+        m="0px"
+      >
         <Route path="/">
-          <FirstPage />
+          <AuthPage />
         </Route>
         <Route path="/dashboard">
-          <Dashboard />
+          <DashboardPage />
         </Route>
         <Route path="/reset-password/:token">
           <ChangePassword />
         </Route>
-      </div>
+      </Flex>
     </Router>
   );
 };
