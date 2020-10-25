@@ -11,7 +11,16 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
   const { data } = useMeQuery();
 
   return (
-    <Box w="15%" h="100%" p="0px 20px">
+    <Box
+      position="fixed"
+      display="block"
+      top="0"
+      left="0"
+      bg="darkBlue"
+      w="15%"
+      height="100%"
+      p="0px 20px"
+    >
       <HeyText username={data?.me?.username} />
       <Box mt="50px">
         <SectionButton endpoint="schedule" name="Schedule" key="1" />

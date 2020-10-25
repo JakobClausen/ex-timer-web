@@ -11,12 +11,12 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   const [sendEmail] = useForgotPasswordMutation();
   const [isComplete, setIsComplete] = useState(false);
   return (
-    <Box>
+    <Box m="40px" h="100%">
       <Formik
         initialValues={{ email: "" }}
-        onSubmit={async (values) => {
+        onSubmit={async ({ email }) => {
           await sendEmail({
-            variables: { email: values.email },
+            variables: { email },
           });
 
           setIsComplete(true);
@@ -35,7 +35,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
                 label="Email"
                 type="email"
               />
-              <Button type="submit" isLoading={isSubmitting}>
+              <Button mt="10px" type="submit" isLoading={isSubmitting}>
                 Send email
               </Button>
             </Form>

@@ -1,4 +1,4 @@
-import { Button } from "@chakra-ui/core";
+import { Box, Button } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 import React from "react";
 import { useParams, useHistory } from "react-router-dom";
@@ -17,7 +17,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = () => {
   const history = useHistory();
 
   return (
-    <>
+    <Box m="40px" h="100%">
       <Formik
         initialValues={{ newPassword: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -45,6 +45,6 @@ export const ChangePassword: React.FC<ChangePasswordProps> = () => {
           </Form>
         )}
       </Formik>
-    </>
+    </Box>
   );
 };

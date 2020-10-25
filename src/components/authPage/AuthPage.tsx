@@ -1,15 +1,15 @@
 import { Box, Flex } from "@chakra-ui/core";
 import React from "react";
 import { Route } from "react-router-dom";
-import { ForgotPassword } from "./auth/forgotPassword/ForgotPassword";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
+import { ForgotPassword } from "../auth/forgotPassword/ForgotPassword";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 
-interface FirstPageProps {}
+interface AuthPageProps {}
 
-export const FirstPage: React.FC<FirstPageProps> = () => {
+export const AuthPage: React.FC<AuthPageProps> = () => {
   return (
-    <Box>
+    <Box h="100vh">
       <Flex>
         <Route exact path="/">
           <Login />

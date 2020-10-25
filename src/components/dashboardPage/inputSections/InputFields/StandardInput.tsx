@@ -7,19 +7,25 @@ import {
 } from "@chakra-ui/core";
 import { useField } from "formik";
 
-type TitleFieldProps = InputHTMLAttributes<HTMLInputElement> & {
+type StandardInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
   placeholder: string;
   type?: string;
 };
 
-export const TitleField: React.FC<TitleFieldProps> = (props) => {
+export const StandardInput: React.FC<StandardInputProps> = (props) => {
   const [field, { error }] = useField(props);
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel htmlFor={field.name}>{props.label}</FormLabel>
+      <FormLabel fontSize="18px" color="black" htmlFor={field.name}>
+        {props.label}
+      </FormLabel>
       <Input
+        fontSize="15px"
+        pl="5px"
+        m="0"
+        h="25px"
         {...field}
         id={field.name}
         placeholder={props.placeholder}
