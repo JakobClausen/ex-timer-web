@@ -39,28 +39,6 @@ export type Whiteboard = {
   date: Scalars['String'];
   user_id: Scalars['Float'];
   user: User;
-  programming_rows: Array<ProgrammingRow>;
-  created_at: Scalars['String'];
-  updated_at: Scalars['String'];
-};
-
-export type ProgrammingRow = {
-  __typename?: 'ProgrammingRow';
-  id: Scalars['Float'];
-  title: Scalars['String'];
-  markdown: Scalars['String'];
-  whiteboard_id: Scalars['Float'];
-  category_id: Scalars['Float'];
-  whiteboard: Whiteboard;
-  category: Category;
-  created_at: Scalars['String'];
-  updated_at: Scalars['String'];
-};
-
-export type Category = {
-  __typename?: 'Category';
-  id: Scalars['Float'];
-  category: Scalars['String'];
   created_at: Scalars['String'];
   updated_at: Scalars['String'];
 };
@@ -105,7 +83,7 @@ export type MutationUpdateUserArgs = {
 
 
 export type MutationCreateWhiteboardArgs = {
-  data: WhiteboardInput;
+  data: DaysInput;
 };
 
 
@@ -143,6 +121,16 @@ export type UpdateUser = {
   username?: Maybe<Scalars['String']>;
 };
 
+export type DaysInput = {
+  Monday: WhiteboardInput;
+  Tuseday: WhiteboardInput;
+  Wednesday: WhiteboardInput;
+  Thursday: WhiteboardInput;
+  Friday: WhiteboardInput;
+  Saturday: WhiteboardInput;
+  Sunday: WhiteboardInput;
+};
+
 export type WhiteboardInput = {
   day: Scalars['String'];
   category: Scalars['Int'];
@@ -154,6 +142,14 @@ export type WhiteboardInput = {
 export type RowField = {
   title: Scalars['String'];
   workout: Scalars['String'];
+};
+
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Float'];
+  category: Scalars['String'];
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
 };
 
 export type CategoryInput = {
@@ -191,7 +187,7 @@ export type ChangePasswordMutation = (
 );
 
 export type CreateWhiteboardMutationVariables = Exact<{
-  data: WhiteboardInput;
+  data: DaysInput;
 }>;
 
 
@@ -323,7 +319,7 @@ export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswo
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
 export const CreateWhiteboardDocument = gql`
-    mutation CreateWhiteboard($data: WhiteboardInput!) {
+    mutation CreateWhiteboard($data: DaysInput!) {
   createWhiteboard(data: $data)
 }
     `;

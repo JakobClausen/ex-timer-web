@@ -8,7 +8,6 @@ export default {
   },
   fonts: {
     ...defaultTheme.fonts,
-
     // add font
   },
 };
