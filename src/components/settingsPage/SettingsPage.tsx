@@ -6,8 +6,8 @@ interface SettingsPageProps {}
 
 export const SettingsPage: React.FC<SettingsPageProps> = () => {
   return (
-    <Flex w="100%">
-      <Text>Change profile picture</Text>
+    <Flex justifyContent="flex-start" w="100%" minHeight="100vh">
+      <Text color="#DFDFDF">Change profile picture</Text>
     </Flex>
   );
 };
