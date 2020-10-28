@@ -1,9 +1,10 @@
-import { Box } from "@chakra-ui/core";
+import { Box, Flex } from "@chakra-ui/core";
 import React from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { HeyText } from "./HeyText";
 import { Logout } from "./Logout";
 import { SectionButton } from "./SectionButton";
+import { Settings } from "./Settings";
 
 interface SidebarDashProps {}
 
@@ -25,6 +26,7 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
       <Box mt="50px">
         <SectionButton endpoint="schedule" name="Schedule" key="1" />
         <SectionButton endpoint="whiteboard" name="Whiteboard" key="2" />
+        <Settings />
       </Box>
       <Logout />
     </Box>

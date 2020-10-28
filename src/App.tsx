@@ -5,6 +5,7 @@ import { ChangePassword } from "./components/auth/changePassword";
 import { TimerPage } from "./components/timerPage/TimerPage";
 import { AuthPage } from "./components/authPage/AuthPage";
 import { Flex } from "@chakra-ui/core";
+import { SettingsPage } from "./components/settingsPage/SettingsPage";
 
 interface appProps {}
 
@@ -29,6 +30,9 @@ const App: React.FC<appProps> = () => {
         </Route>
         <Route path="/timer">
           <TimerPage />
+        </Route>
+        <Route path="/dashboard/settings">
+          <SettingsPage />
         </Route>
       </Flex>
     </Router>
