@@ -1,14 +1,18 @@
-import { Box } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/core";
 import React from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { HeyText } from "./HeyText";
 import { Logout } from "./Logout";
 import { SectionButton } from "./SectionButton";
+import { Settings } from "./Settings";
+import { useHistory } from "react-router";
+import { Link } from "react-router-dom";
 
 interface SidebarDashProps {}
 
 export const SidebarDash: React.FC<SidebarDashProps> = () => {
   const { data } = useMeQuery();
+  const history = useHistory();
 
   return (
     <Box
@@ -25,7 +29,12 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
       <Box mt="50px">
         <SectionButton endpoint="schedule" name="Schedule" key="1" />
         <SectionButton endpoint="whiteboard" name="Whiteboard" key="2" />
+        <Settings />
       </Box>
+      <Link style={{ textDecoration: "none", color: "#DFDFDF" }} to="/timer">
+        <Text mt="10px">Open timer</Text>
+      </Link>
+
       <Logout />
     </Box>
   );
