@@ -29,6 +29,7 @@ export type User = {
   email: Scalars['String'];
   username: Scalars['String'];
   whiteboards: Array<Whiteboard>;
+  schedule: Array<Schedule>;
   created_at: Scalars['String'];
   updated_at: Scalars['String'];
 };
@@ -39,6 +40,53 @@ export type Whiteboard = {
   date: Scalars['String'];
   user_id: Scalars['Float'];
   user: User;
+  workout: Array<Workout>;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type Workout = {
+  __typename?: 'Workout';
+  id: Scalars['Float'];
+  title: Scalars['String'];
+  workout: Scalars['String'];
+  category_id: Scalars['Float'];
+  whiteboard_id: Scalars['Float'];
+  whiteboard: Whiteboard;
+  category: Category;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type Category = {
+  __typename?: 'Category';
+  id: Scalars['Float'];
+  category: Scalars['String'];
+  workouts: Array<Workout>;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type Schedule = {
+  __typename?: 'Schedule';
+  id: Scalars['Float'];
+  day: Scalars['String'];
+  user_id: Scalars['Float'];
+  user: User;
+  gymClass: Array<GymClass>;
+  created_at: Scalars['String'];
+  updated_at: Scalars['String'];
+};
+
+export type GymClass = {
+  __typename?: 'GymClass';
+  id: Scalars['Float'];
+  start_time: Scalars['String'];
+  end_time: Scalars['String'];
+  category_id: Scalars['Float'];
+  schedule_id: Scalars['Float'];
+  schedule: Schedule;
+  category: Category;
   created_at: Scalars['String'];
   updated_at: Scalars['String'];
 };
@@ -53,6 +101,7 @@ export type Mutation = {
   updateUser?: Maybe<UserResponse>;
   createWhiteboard: Scalars['Boolean'];
   createCategory: Category;
+  createSchedule: Scalars['Boolean'];
 };
 
 
@@ -89,6 +138,11 @@ export type MutationCreateWhiteboardArgs = {
 
 export type MutationCreateCategoryArgs = {
   data: CategoryInput;
+};
+
+
+export type MutationCreateScheduleArgs = {
+  data: ScheduleClassInput;
 };
 
 export type UserResponse = {
@@ -144,16 +198,85 @@ export type RowField = {
   workout: Scalars['String'];
 };
 
-export type Category = {
-  __typename?: 'Category';
-  id: Scalars['Float'];
-  category: Scalars['String'];
-  created_at: Scalars['String'];
-  updated_at: Scalars['String'];
-};
-
 export type CategoryInput = {
   category: Scalars['String'];
+};
+
+export type ScheduleClassInput = {
+  Monday: ScheduleInput;
+  Tuseday: ScheduleInput;
+  Wednesday: ScheduleInput;
+  Thursday: ScheduleInput;
+  Friday: ScheduleInput;
+  Saturday: ScheduleInput;
+  Sunday: ScheduleInput;
+};
+
+export type ScheduleInput = {
+  day: Scalars['String'];
+  classes: Array<ClassInput>;
+};
+
+export type ClassInput = {
+  start_time: Scalars['String'];
+  end_time: Scalars['String'];
+  category: Scalars['Float'];
+};
+
+export type Subscription = {
+  __typename?: 'Subscription';
+  subWhiteboard: SubscriptionData;
+  subSchedule: ScheduleClassSub;
+};
+
+export type SubscriptionData = {
+  __typename?: 'SubscriptionData';
+  Monday: Two;
+  Tuseday: Two;
+  Wednesday: Two;
+  Thursday: Two;
+  Friday: Two;
+  Saturday: Two;
+  Sunday: Two;
+};
+
+export type Two = {
+  __typename?: 'Two';
+  day: Scalars['String'];
+  category: Scalars['Int'];
+  one: Three;
+  two: Three;
+  three: Three;
+};
+
+export type Three = {
+  __typename?: 'Three';
+  title: Scalars['String'];
+  workout: Scalars['String'];
+};
+
+export type ScheduleClassSub = {
+  __typename?: 'ScheduleClassSub';
+  Monday: ScheduleSub;
+  Tuseday: ScheduleSub;
+  Wednesday: ScheduleSub;
+  Thursday: ScheduleSub;
+  Friday: ScheduleSub;
+  Saturday: ScheduleSub;
+  Sunday: ScheduleSub;
+};
+
+export type ScheduleSub = {
+  __typename?: 'ScheduleSub';
+  day: Scalars['String'];
+  classes: Array<ClassSub>;
+};
+
+export type ClassSub = {
+  __typename?: 'ClassSub';
+  start_time: Scalars['String'];
+  end_time: Scalars['String'];
+  category: Scalars['Float'];
 };
 
 export type RegularUserFragment = (
@@ -264,6 +387,108 @@ export type MeQuery = (
     { __typename?: 'User' }
     & RegularUserFragment
   )> }
+);
+
+export type SubWhiteboardSubscriptionVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SubWhiteboardSubscription = (
+  { __typename?: 'Subscription' }
+  & { subWhiteboard: (
+    { __typename?: 'SubscriptionData' }
+    & { Monday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Tuseday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Wednesday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Thursday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Friday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Saturday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ), Sunday: (
+      { __typename?: 'Two' }
+      & Pick<Two, 'day' | 'category'>
+      & { one: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), two: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ), three: (
+        { __typename?: 'Three' }
+        & Pick<Three, 'title' | 'workout'>
+      ) }
+    ) }
+  ) }
 );
 
 export const RegularUserFragmentDoc = gql`
@@ -518,3 +743,142 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
+export const SubWhiteboardDocument = gql`
+    subscription SubWhiteboard {
+  subWhiteboard {
+    Monday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Tuseday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Wednesday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Thursday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Friday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Saturday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+    Sunday {
+      day
+      category
+      one {
+        title
+        workout
+      }
+      two {
+        title
+        workout
+      }
+      three {
+        title
+        workout
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useSubWhiteboardSubscription__
+ *
+ * To run a query within a React component, call `useSubWhiteboardSubscription` and pass it any options that fit your needs.
+ * When your component renders, `useSubWhiteboardSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSubWhiteboardSubscription({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSubWhiteboardSubscription(baseOptions?: Apollo.SubscriptionHookOptions<SubWhiteboardSubscription, SubWhiteboardSubscriptionVariables>) {
+        return Apollo.useSubscription<SubWhiteboardSubscription, SubWhiteboardSubscriptionVariables>(SubWhiteboardDocument, baseOptions);
+      }
+export type SubWhiteboardSubscriptionHookResult = ReturnType<typeof useSubWhiteboardSubscription>;
+export type SubWhiteboardSubscriptionResult = Apollo.SubscriptionResult<SubWhiteboardSubscription>;
