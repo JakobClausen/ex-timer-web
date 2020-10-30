@@ -1,4 +1,3 @@
-import { Flex } from "@chakra-ui/core";
 import React from "react";
 import { SectionButton } from "./SectionButton";
 
