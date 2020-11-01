@@ -1,0 +1,9 @@
+query GetAllWhiteboards {
+  getAllWhiteboards {
+    day
+    workout {
+      title
+      workout
+    }
+  }
+}

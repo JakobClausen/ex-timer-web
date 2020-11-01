@@ -1,22 +1,21 @@
-import { Box, Heading, Stack, Text } from "@chakra-ui/core";
+import { Box, Heading, Stack } from "@chakra-ui/core";
 import React from "react";
+import ReactHtmlParser from "react-html-parser";
+import "./Whiteboard";
 
 interface WorkoutProps {
-  title: string;
+  title?: string;
+  workout?: string;
 }
 
-export const Workout: React.FC<WorkoutProps> = ({ title }) => {
+export const Workout: React.FC<WorkoutProps> = ({ title, workout }) => {
   return (
-    <Box p="5px">
+    <Box p="20px" textAlign="center">
       <Stack>
-        <Heading as="h2" size="md">
-          {title}
+        <Heading as="h3" size="lg">
+          {ReactHtmlParser(title || "Title")}
         </Heading>
-        <Text>Foam roll</Text>
-        <Text>1:00 Upper back/lats</Text>
-        <Text>1:00 Upper back/lats</Text>
-        <Text>1:00 Upper back/lats</Text>
-        <Text>1:00 Upper back/latasadfsdfsdasdasd</Text>
+        {ReactHtmlParser(workout || "")}
       </Stack>
     </Box>
   );

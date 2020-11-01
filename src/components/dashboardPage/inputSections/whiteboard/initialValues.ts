@@ -1,9 +1,8 @@
-import marked from "marked";
 export default {
   Monday: {
     day: "Monday",
     category: 1,
-    one: { title: marked(""), workout: marked("") },
+    one: { title: "", workout: "" },
 
     two: { title: "", workout: "" },
 
