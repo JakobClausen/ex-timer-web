@@ -1,0 +1,9 @@
+query GetWhiteboard($day: String!) {
+  getWhiteboard(day: $day) {
+    day
+    workout {
+      title
+      workout
+    }
+  }
+}

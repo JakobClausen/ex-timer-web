@@ -15,12 +15,18 @@ export type Query = {
   __typename?: 'Query';
   me?: Maybe<User>;
   getUser: User;
-  getWhiteboard: Array<Whiteboard>;
+  getWhiteboard: Whiteboard;
+  getAllWhiteboards: Array<Whiteboard>;
 };
 
 
 export type QueryGetUserArgs = {
   id: Scalars['Float'];
+};
+
+
+export type QueryGetWhiteboardArgs = {
+  day: Scalars['String'];
 };
 
 export type User = {
@@ -37,7 +43,7 @@ export type User = {
 export type Whiteboard = {
   __typename?: 'Whiteboard';
   id: Scalars['Float'];
-  date: Scalars['String'];
+  day: Scalars['String'];
   user_id: Scalars['Float'];
   user: User;
   workout: Array<Workout>;
@@ -223,62 +229,6 @@ export type ClassInput = {
   category: Scalars['Float'];
 };
 
-export type Subscription = {
-  __typename?: 'Subscription';
-  subWhiteboard: SubscriptionData;
-  subSchedule: ScheduleClassSub;
-};
-
-export type SubscriptionData = {
-  __typename?: 'SubscriptionData';
-  Monday: Two;
-  Tuseday: Two;
-  Wednesday: Two;
-  Thursday: Two;
-  Friday: Two;
-  Saturday: Two;
-  Sunday: Two;
-};
-
-export type Two = {
-  __typename?: 'Two';
-  day: Scalars['String'];
-  category: Scalars['Int'];
-  one: Three;
-  two: Three;
-  three: Three;
-};
-
-export type Three = {
-  __typename?: 'Three';
-  title: Scalars['String'];
-  workout: Scalars['String'];
-};
-
-export type ScheduleClassSub = {
-  __typename?: 'ScheduleClassSub';
-  Monday: ScheduleSub;
-  Tuseday: ScheduleSub;
-  Wednesday: ScheduleSub;
-  Thursday: ScheduleSub;
-  Friday: ScheduleSub;
-  Saturday: ScheduleSub;
-  Sunday: ScheduleSub;
-};
-
-export type ScheduleSub = {
-  __typename?: 'ScheduleSub';
-  day: Scalars['String'];
-  classes: Array<ClassSub>;
-};
-
-export type ClassSub = {
-  __typename?: 'ClassSub';
-  start_time: Scalars['String'];
-  end_time: Scalars['String'];
-  category: Scalars['Float'];
-};
-
 export type RegularUserFragment = (
   { __typename?: 'User' }
   & Pick<User, 'id' | 'email' | 'username'>
@@ -378,6 +328,21 @@ export type RegisterMutation = (
   ) }
 );
 
+export type GetAllWhiteboardsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllWhiteboardsQuery = (
+  { __typename?: 'Query' }
+  & { getAllWhiteboards: Array<(
+    { __typename?: 'Whiteboard' }
+    & Pick<Whiteboard, 'day'>
+    & { workout: Array<(
+      { __typename?: 'Workout' }
+      & Pick<Workout, 'title' | 'workout'>
+    )> }
+  )> }
+);
+
 export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -389,105 +354,20 @@ export type MeQuery = (
   )> }
 );
 
-export type SubWhiteboardSubscriptionVariables = Exact<{ [key: string]: never; }>;
+export type GetWhiteboardQueryVariables = Exact<{
+  day: Scalars['String'];
+}>;
 
 
-export type SubWhiteboardSubscription = (
-  { __typename?: 'Subscription' }
-  & { subWhiteboard: (
-    { __typename?: 'SubscriptionData' }
-    & { Monday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Tuseday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Wednesday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Thursday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Friday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Saturday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ), Sunday: (
-      { __typename?: 'Two' }
-      & Pick<Two, 'day' | 'category'>
-      & { one: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), two: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ), three: (
-        { __typename?: 'Three' }
-        & Pick<Three, 'title' | 'workout'>
-      ) }
-    ) }
+export type GetWhiteboardQuery = (
+  { __typename?: 'Query' }
+  & { getWhiteboard: (
+    { __typename?: 'Whiteboard' }
+    & Pick<Whiteboard, 'day'>
+    & { workout: Array<(
+      { __typename?: 'Workout' }
+      & Pick<Workout, 'title' | 'workout'>
+    )> }
   ) }
 );
 
@@ -711,6 +591,42 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const GetAllWhiteboardsDocument = gql`
+    query GetAllWhiteboards {
+  getAllWhiteboards {
+    day
+    workout {
+      title
+      workout
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllWhiteboardsQuery__
+ *
+ * To run a query within a React component, call `useGetAllWhiteboardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllWhiteboardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllWhiteboardsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllWhiteboardsQuery(baseOptions?: Apollo.QueryHookOptions<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>) {
+        return Apollo.useQuery<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>(GetAllWhiteboardsDocument, baseOptions);
+      }
+export function useGetAllWhiteboardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>(GetAllWhiteboardsDocument, baseOptions);
+        }
+export type GetAllWhiteboardsQueryHookResult = ReturnType<typeof useGetAllWhiteboardsQuery>;
+export type GetAllWhiteboardsLazyQueryHookResult = ReturnType<typeof useGetAllWhiteboardsLazyQuery>;
+export type GetAllWhiteboardsQueryResult = Apollo.QueryResult<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {
@@ -743,142 +659,40 @@ export function useMeLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MeQuery
 export type MeQueryHookResult = ReturnType<typeof useMeQuery>;
 export type MeLazyQueryHookResult = ReturnType<typeof useMeLazyQuery>;
 export type MeQueryResult = Apollo.QueryResult<MeQuery, MeQueryVariables>;
-export const SubWhiteboardDocument = gql`
-    subscription SubWhiteboard {
-  subWhiteboard {
-    Monday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Tuseday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Wednesday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Thursday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Friday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Saturday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
-    }
-    Sunday {
-      day
-      category
-      one {
-        title
-        workout
-      }
-      two {
-        title
-        workout
-      }
-      three {
-        title
-        workout
-      }
+export const GetWhiteboardDocument = gql`
+    query GetWhiteboard($day: String!) {
+  getWhiteboard(day: $day) {
+    day
+    workout {
+      title
+      workout
     }
   }
 }
     `;
 
 /**
- * __useSubWhiteboardSubscription__
+ * __useGetWhiteboardQuery__
  *
- * To run a query within a React component, call `useSubWhiteboardSubscription` and pass it any options that fit your needs.
- * When your component renders, `useSubWhiteboardSubscription` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useGetWhiteboardQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWhiteboardQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
- * @param baseOptions options that will be passed into the subscription, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useSubWhiteboardSubscription({
+ * const { data, loading, error } = useGetWhiteboardQuery({
  *   variables: {
+ *      day: // value for 'day'
  *   },
  * });
  */
-export function useSubWhiteboardSubscription(baseOptions?: Apollo.SubscriptionHookOptions<SubWhiteboardSubscription, SubWhiteboardSubscriptionVariables>) {
-        return Apollo.useSubscription<SubWhiteboardSubscription, SubWhiteboardSubscriptionVariables>(SubWhiteboardDocument, baseOptions);
+export function useGetWhiteboardQuery(baseOptions?: Apollo.QueryHookOptions<GetWhiteboardQuery, GetWhiteboardQueryVariables>) {
+        return Apollo.useQuery<GetWhiteboardQuery, GetWhiteboardQueryVariables>(GetWhiteboardDocument, baseOptions);
       }
-export type SubWhiteboardSubscriptionHookResult = ReturnType<typeof useSubWhiteboardSubscription>;
-export type SubWhiteboardSubscriptionResult = Apollo.SubscriptionResult<SubWhiteboardSubscription>;
+export function useGetWhiteboardLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetWhiteboardQuery, GetWhiteboardQueryVariables>) {
+          return Apollo.useLazyQuery<GetWhiteboardQuery, GetWhiteboardQueryVariables>(GetWhiteboardDocument, baseOptions);
+        }
+export type GetWhiteboardQueryHookResult = ReturnType<typeof useGetWhiteboardQuery>;
+export type GetWhiteboardLazyQueryHookResult = ReturnType<typeof useGetWhiteboardLazyQuery>;
+export type GetWhiteboardQueryResult = Apollo.QueryResult<GetWhiteboardQuery, GetWhiteboardQueryVariables>;

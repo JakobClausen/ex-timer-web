@@ -1,9 +1,8 @@
+import React from "react";
 import { Box, Button, Grid } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
-import React from "react";
 import { DayForm } from "./DayForm";
 import initialValues from "./initialValues";
-import { createMarkdown } from "../../../../utils/createMarkdown";
 import { useCreateWhiteboardMutation } from "../../../../generated/graphql";
 
 interface WhiteboardContainerProps {}
@@ -17,22 +16,13 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
           ...initialValues,
         }}
         onSubmit={async (values, { setErrors }) => {
-          const data = createMarkdown(values);
-          const response = await sendWhiteboard({
+          console.log(values);
+
+          await sendWhiteboard({
             variables: {
-              data: {
-                Monday: data.Monday,
-                Tuseday: data.Tuseday,
-                Wednesday: data.Wednesday,
-                Thursday: data.Thursday,
-                Friday: data.Friday,
-                Saturday: data.Saturday,
-                Sunday: data.Sunday,
-              },
+              data: { ...values },
             },
           });
-          console.log(data);
-          console.log(response);
         }}
       >
         {({ isSubmitting }) => (

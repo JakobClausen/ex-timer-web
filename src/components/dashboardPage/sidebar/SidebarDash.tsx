@@ -5,15 +5,12 @@ import { HeyText } from "./HeyText";
 import { Logout } from "./Logout";
 import { SectionButton } from "./SectionButton";
 import { Settings } from "./Settings";
-// import { useHistory } from "react-router";
 import { Link } from "react-router-dom";
 
 interface SidebarDashProps {}
 
 export const SidebarDash: React.FC<SidebarDashProps> = () => {
   const { data } = useMeQuery();
-  // const history = useHistory();
-
   return (
     <Box
       position="fixed"
