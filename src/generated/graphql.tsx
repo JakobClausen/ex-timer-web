@@ -17,6 +17,7 @@ export type Query = {
   getUser: User;
   getWhiteboard: Whiteboard;
   getAllWhiteboards: Array<Whiteboard>;
+  getDaySchedule: Array<ScheduleResponse>;
 };
 
 
@@ -26,6 +27,11 @@ export type QueryGetUserArgs = {
 
 
 export type QueryGetWhiteboardArgs = {
+  day: Scalars['String'];
+};
+
+
+export type QueryGetDayScheduleArgs = {
   day: Scalars['String'];
 };
 
@@ -95,6 +101,19 @@ export type GymClass = {
   category: Category;
   created_at: Scalars['String'];
   updated_at: Scalars['String'];
+};
+
+export type ScheduleResponse = {
+  __typename?: 'ScheduleResponse';
+  day: Scalars['String'];
+  gymClass: Array<ClassResponse>;
+};
+
+export type ClassResponse = {
+  __typename?: 'ClassResponse';
+  start_time: Scalars['String'];
+  end_time: Scalars['String'];
+  category_id: Scalars['Float'];
 };
 
 export type Mutation = {
@@ -339,6 +358,23 @@ export type GetAllWhiteboardsQuery = (
     & { workout: Array<(
       { __typename?: 'Workout' }
       & Pick<Workout, 'title' | 'workout'>
+    )> }
+  )> }
+);
+
+export type GetDayScheduleQueryVariables = Exact<{
+  day: Scalars['String'];
+}>;
+
+
+export type GetDayScheduleQuery = (
+  { __typename?: 'Query' }
+  & { getDaySchedule: Array<(
+    { __typename?: 'ScheduleResponse' }
+    & Pick<ScheduleResponse, 'day'>
+    & { gymClass: Array<(
+      { __typename?: 'ClassResponse' }
+      & Pick<ClassResponse, 'start_time' | 'end_time' | 'category_id'>
     )> }
   )> }
 );
@@ -627,6 +663,44 @@ export function useGetAllWhiteboardsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type GetAllWhiteboardsQueryHookResult = ReturnType<typeof useGetAllWhiteboardsQuery>;
 export type GetAllWhiteboardsLazyQueryHookResult = ReturnType<typeof useGetAllWhiteboardsLazyQuery>;
 export type GetAllWhiteboardsQueryResult = Apollo.QueryResult<GetAllWhiteboardsQuery, GetAllWhiteboardsQueryVariables>;
+export const GetDayScheduleDocument = gql`
+    query getDaySchedule($day: String!) {
+  getDaySchedule(day: $day) {
+    day
+    gymClass {
+      start_time
+      end_time
+      category_id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetDayScheduleQuery__
+ *
+ * To run a query within a React component, call `useGetDayScheduleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetDayScheduleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetDayScheduleQuery({
+ *   variables: {
+ *      day: // value for 'day'
+ *   },
+ * });
+ */
+export function useGetDayScheduleQuery(baseOptions?: Apollo.QueryHookOptions<GetDayScheduleQuery, GetDayScheduleQueryVariables>) {
+        return Apollo.useQuery<GetDayScheduleQuery, GetDayScheduleQueryVariables>(GetDayScheduleDocument, baseOptions);
+      }
+export function useGetDayScheduleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetDayScheduleQuery, GetDayScheduleQueryVariables>) {
+          return Apollo.useLazyQuery<GetDayScheduleQuery, GetDayScheduleQueryVariables>(GetDayScheduleDocument, baseOptions);
+        }
+export type GetDayScheduleQueryHookResult = ReturnType<typeof useGetDayScheduleQuery>;
+export type GetDayScheduleLazyQueryHookResult = ReturnType<typeof useGetDayScheduleLazyQuery>;
+export type GetDayScheduleQueryResult = Apollo.QueryResult<GetDayScheduleQuery, GetDayScheduleQueryVariables>;
 export const MeDocument = gql`
     query Me {
   me {

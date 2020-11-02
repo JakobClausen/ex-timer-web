@@ -1,0 +1,10 @@
+query getDaySchedule($day: String!) {
+  getDaySchedule(day: $day) {
+    day
+    gymClass {
+      start_time
+      end_time
+      category_id
+    }
+  }
+}
