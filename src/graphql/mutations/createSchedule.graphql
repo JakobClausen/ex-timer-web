@@ -1,0 +1,3 @@
+mutation CreateSchedule($data: ScheduleClassInput!) {
+  createSchedule(data: $data)
+}

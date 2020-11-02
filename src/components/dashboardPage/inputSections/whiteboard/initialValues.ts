@@ -8,8 +8,8 @@ export default {
 
     three: { title: "", workout: "" },
   },
-  Tuseday: {
-    day: "Tuseday",
+  Tuesday: {
+    day: "Tuesday",
     category: 1,
     one: { title: "", workout: "" },
 

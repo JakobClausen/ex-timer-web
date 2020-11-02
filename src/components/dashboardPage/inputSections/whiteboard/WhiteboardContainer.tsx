@@ -27,7 +27,7 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
           <Form noValidate>
             <Grid templateColumns="repeat(4, 1fr)" gap={6} p="10px">
               <DayForm day="Monday" />
-              <DayForm day="Tuseday" />
+              <DayForm day="Tuesday" />
               <DayForm day="Wednesday" />
               <DayForm day="Thursday" />
               <DayForm day="Friday" />

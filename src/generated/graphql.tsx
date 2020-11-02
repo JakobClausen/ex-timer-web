@@ -202,7 +202,7 @@ export type UpdateUser = {
 
 export type DaysInput = {
   Monday: WhiteboardInput;
-  Tuseday: WhiteboardInput;
+  Tuesday: WhiteboardInput;
   Wednesday: WhiteboardInput;
   Thursday: WhiteboardInput;
   Friday: WhiteboardInput;
@@ -229,7 +229,7 @@ export type CategoryInput = {
 
 export type ScheduleClassInput = {
   Monday: ScheduleInput;
-  Tuseday: ScheduleInput;
+  Tuesday: ScheduleInput;
   Wednesday: ScheduleInput;
   Thursday: ScheduleInput;
   Friday: ScheduleInput;
@@ -276,6 +276,16 @@ export type ChangePasswordMutation = (
       & RegularUserFragment
     )> }
   ) }
+);
+
+export type CreateScheduleMutationVariables = Exact<{
+  data: ScheduleClassInput;
+}>;
+
+
+export type CreateScheduleMutation = (
+  { __typename?: 'Mutation' }
+  & Pick<Mutation, 'createSchedule'>
 );
 
 export type CreateWhiteboardMutationVariables = Exact<{
@@ -459,6 +469,36 @@ export function useChangePasswordMutation(baseOptions?: Apollo.MutationHookOptio
 export type ChangePasswordMutationHookResult = ReturnType<typeof useChangePasswordMutation>;
 export type ChangePasswordMutationResult = Apollo.MutationResult<ChangePasswordMutation>;
 export type ChangePasswordMutationOptions = Apollo.BaseMutationOptions<ChangePasswordMutation, ChangePasswordMutationVariables>;
+export const CreateScheduleDocument = gql`
+    mutation CreateSchedule($data: ScheduleClassInput!) {
+  createSchedule(data: $data)
+}
+    `;
+export type CreateScheduleMutationFn = Apollo.MutationFunction<CreateScheduleMutation, CreateScheduleMutationVariables>;
+
+/**
+ * __useCreateScheduleMutation__
+ *
+ * To run a mutation, you first call `useCreateScheduleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateScheduleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createScheduleMutation, { data, loading, error }] = useCreateScheduleMutation({
+ *   variables: {
+ *      data: // value for 'data'
+ *   },
+ * });
+ */
+export function useCreateScheduleMutation(baseOptions?: Apollo.MutationHookOptions<CreateScheduleMutation, CreateScheduleMutationVariables>) {
+        return Apollo.useMutation<CreateScheduleMutation, CreateScheduleMutationVariables>(CreateScheduleDocument, baseOptions);
+      }
+export type CreateScheduleMutationHookResult = ReturnType<typeof useCreateScheduleMutation>;
+export type CreateScheduleMutationResult = Apollo.MutationResult<CreateScheduleMutation>;
+export type CreateScheduleMutationOptions = Apollo.BaseMutationOptions<CreateScheduleMutation, CreateScheduleMutationVariables>;
 export const CreateWhiteboardDocument = gql`
     mutation CreateWhiteboard($data: DaysInput!) {
   createWhiteboard(data: $data)
