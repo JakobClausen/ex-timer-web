@@ -36,9 +36,6 @@ export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
         {...field}
         id={props.id}
         type="text"
-        onChange={(e: any) => {
-          setWorkout(e.target.value);
-        }}
         value={workout}
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}

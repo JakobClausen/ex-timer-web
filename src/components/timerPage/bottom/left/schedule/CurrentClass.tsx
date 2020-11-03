@@ -1,18 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Flex, Stack, Text } from "@chakra-ui/core";
-import { useGetDayScheduleQuery } from "../../../../generated/graphql";
 
-interface ScheduleProps {}
+interface CurrentClassProps {}
 
-export const Schedule: React.FC<ScheduleProps> = () => {
-  const { data } = useGetDayScheduleQuery({ variables: { day: "Monday" } });
-  const [schedule, setSchedule] = useState<any>(null);
-
-  useEffect(() => {
-    setSchedule(data?.getDaySchedule[0].gymClass[0]);
-  }, [data]);
-  console.log(schedule);
-
+export const CurrentClass: React.FC<CurrentClassProps> = () => {
   return (
     <Flex bg="readyGreen" h="60px" borderRadius="5px" padding="5px">
       <Flex
@@ -31,9 +22,9 @@ export const Schedule: React.FC<ScheduleProps> = () => {
             Monday, Oct 12
           </Text>
           <Text margin="0" color="white">
-            {schedule
+            {/* {schedule
               ? ` Crossfit ${schedule.start_time} - ${schedule.end_time}`
-              : null}
+              : null} */}
           </Text>
         </Stack>
       </Flex>

@@ -38,9 +38,6 @@ export const StandardInput: React.FC<StandardInputProps> = (props) => {
         {...field}
         id={field.name}
         placeholder={props.placeholder}
-        onChange={(e: any) => {
-          setTitle(e.target.value);
-        }}
         value={title}
         type={props.type}
       />
