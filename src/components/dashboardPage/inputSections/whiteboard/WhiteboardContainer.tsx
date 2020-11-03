@@ -16,11 +16,12 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
           ...initialValues,
         }}
         onSubmit={async (values, { setErrors }) => {
-          await sendWhiteboard({
-            variables: {
-              data: { ...values },
-            },
-          });
+          console.log(values);
+          // await sendWhiteboard({
+          //   variables: {
+          //     data: { ...values },
+          //   },
+          // });
         }}
       >
         {({ isSubmitting }) => (

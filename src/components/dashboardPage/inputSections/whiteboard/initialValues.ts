@@ -1,8 +1,10 @@
+import removeMd from "remove-markdown";
+
 export default {
   Monday: {
     day: "Monday",
     category: 1,
-    one: { title: "", workout: "" },
+    one: { title: removeMd(""), workout: removeMd("") },
 
     two: { title: "", workout: "" },
 

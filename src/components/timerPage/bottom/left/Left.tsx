@@ -12,7 +12,6 @@ export const Left: React.FC<LeftProps> = () => {
 
   const { data } = useGetDayScheduleQuery({
     variables: { day: today },
-    pollInterval: 500,
   });
   const [schedule, setSchedule] = useState<any>(null);
 
