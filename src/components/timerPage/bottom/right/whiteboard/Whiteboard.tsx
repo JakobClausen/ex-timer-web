@@ -2,7 +2,7 @@ import { Box, Grid } from "@chakra-ui/core";
 import React, { useEffect, useState } from "react";
 import { Workout } from "./Workout";
 import { BoardDivider } from "./BoardDivider";
-import { useGetWhiteboardQuery } from "../../../../generated/graphql";
+import { useGetWhiteboardQuery } from "../../../../../generated/graphql";
 
 interface WhiteboardProps {}
 
@@ -22,7 +22,7 @@ export const Whiteboard: React.FC<WhiteboardProps> = () => {
   }, [data]);
 
   return (
-    <Box h="80%" mt="80px" bg="white" borderRadius="10px" position="relative">
+    <Box h="100%" bg="white" borderRadius="10px" position="relative">
       <Grid templateColumns="repeat(3, 33%)">
         <Workout
           title={loading ? loading : workouts.workoutOne?.title}

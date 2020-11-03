@@ -7,7 +7,7 @@ import { useCreateScheduleMutation } from "../../../../generated/graphql";
 
 interface ScheduleContainerProps {}
 
-export const ScheduleContainer: React.FC<ScheduleContainerProps> = ({}) => {
+export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const [createSchedule] = useCreateScheduleMutation();
   return (
     <Box w="100%">

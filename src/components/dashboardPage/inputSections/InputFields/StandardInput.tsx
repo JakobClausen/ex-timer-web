@@ -38,7 +38,7 @@ export const StandardInput: React.FC<StandardInputProps> = (props) => {
         {...field}
         id={field.name}
         placeholder={props.placeholder}
-        // value={title}
+        value={title}
         type={props.type}
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
