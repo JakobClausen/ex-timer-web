@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, useEffect, useState } from "react";
+import React, { InputHTMLAttributes } from "react";
 import {
   FormControl,
   FormErrorMessage,
@@ -6,23 +6,16 @@ import {
   Input,
 } from "@chakra-ui/core";
 import { useField } from "formik";
-import removeMd from "remove-markdown";
 
 type StandardInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
   placeholder?: string;
   type?: string;
-  preTitle: string | undefined;
 };
 
 export const StandardInput: React.FC<StandardInputProps> = (props) => {
   const [field, { error }] = useField(props);
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    setTitle(removeMd(props.preTitle ? props.preTitle : ""));
-  }, [props.preTitle]);
 
   return (
     <FormControl isInvalid={!!error}>
@@ -38,10 +31,6 @@ export const StandardInput: React.FC<StandardInputProps> = (props) => {
         {...field}
         id={field.name}
         placeholder={props.placeholder}
-        // onChange={(e: any) => {
-        //   setTitle(e.target.value);
-        // }}
-        // value={title}
         type={props.type}
       />
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}

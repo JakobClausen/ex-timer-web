@@ -1,67 +1,36 @@
 import removeMd from "remove-markdown";
 
-export default {
-  Monday: {
-    day: "Monday",
-    category: 1,
-    one: { title: removeMd(""), workout: removeMd("") },
+export const getInitialValues = (days: any) => {
+  let x = days.map((day: any) => {
+    return {
+      day: day.day,
+      category: 1,
+      order: day.order,
+      one: {
+        title: removeMd(day.workout[0].title),
+        workout: removeMd(day.workout[0].workout),
+        order: day.workout[0].order,
+      },
+      two: {
+        title: removeMd(day.workout[1].title),
+        workout: removeMd(day.workout[1].workout),
+        order: day.workout[1].order,
+      },
+      three: {
+        title: removeMd(day.workout[2].title),
+        workout: removeMd(day.workout[2].workout),
+        order: day.workout[2].order,
+      },
+    };
+  });
 
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Tuesday: {
-    day: "Tuesday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Wednesday: {
-    day: "Wednesday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Thursday: {
-    day: "Thursday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Friday: {
-    day: "Friday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Saturday: {
-    day: "Saturday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
-  Sunday: {
-    day: "Sunday",
-    category: 1,
-    one: { title: "", workout: "" },
-
-    two: { title: "", workout: "" },
-
-    three: { title: "", workout: "" },
-  },
+  return {
+    Monday: x[0],
+    Tuesday: x[1],
+    Wednesday: x[2],
+    Thursday: x[3],
+    Friday: x[4],
+    Saturday: x[5],
+    Sunday: x[6],
+  };
 };

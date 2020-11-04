@@ -50,6 +50,7 @@ export type Whiteboard = {
   __typename?: 'Whiteboard';
   id: Scalars['Float'];
   day: Scalars['String'];
+  order: Scalars['Int'];
   user_id: Scalars['Float'];
   user: User;
   workout: Array<Workout>;
@@ -62,6 +63,7 @@ export type Workout = {
   id: Scalars['Float'];
   title: Scalars['String'];
   workout: Scalars['String'];
+  order: Scalars['Int'];
   category_id: Scalars['Float'];
   whiteboard_id: Scalars['Float'];
   whiteboard: Whiteboard;
@@ -213,6 +215,7 @@ export type DaysInput = {
 export type WhiteboardInput = {
   day: Scalars['String'];
   category: Scalars['Int'];
+  order: Scalars['Int'];
   one: RowField;
   two: RowField;
   three: RowField;
@@ -221,6 +224,7 @@ export type WhiteboardInput = {
 export type RowField = {
   title: Scalars['String'];
   workout: Scalars['String'];
+  order: Scalars['Float'];
 };
 
 export type CategoryInput = {
@@ -364,10 +368,10 @@ export type GetAllWhiteboardsQuery = (
   { __typename?: 'Query' }
   & { getAllWhiteboards: Array<(
     { __typename?: 'Whiteboard' }
-    & Pick<Whiteboard, 'day'>
+    & Pick<Whiteboard, 'day' | 'order'>
     & { workout: Array<(
       { __typename?: 'Workout' }
-      & Pick<Workout, 'title' | 'workout'>
+      & Pick<Workout, 'title' | 'workout' | 'order' | 'category_id'>
     )> }
   )> }
 );
@@ -671,9 +675,12 @@ export const GetAllWhiteboardsDocument = gql`
     query GetAllWhiteboards {
   getAllWhiteboards {
     day
+    order
     workout {
       title
       workout
+      order
+      category_id
     }
   }
 }

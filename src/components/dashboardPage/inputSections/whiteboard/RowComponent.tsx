@@ -6,16 +6,12 @@ interface RowComponentProps {
   id: string;
   titleField: string;
   textField: string;
-  preTitle: string | undefined;
-  preWorkout: string | undefined;
 }
 
 export const RowComponent: React.FC<RowComponentProps> = ({
   id,
   titleField,
   textField,
-  preTitle,
-  preWorkout,
 }) => {
   return (
     <>
@@ -24,14 +20,8 @@ export const RowComponent: React.FC<RowComponentProps> = ({
         placeholder="Warm-up"
         label="Title"
         type="text"
-        preTitle={preTitle}
       />
-      <WorkoutInput
-        id={id}
-        name={textField}
-        label={textField}
-        preWorkout={preWorkout}
-      />
+      <WorkoutInput id={id} name={textField} label={textField} />
     </>
   );
 };
