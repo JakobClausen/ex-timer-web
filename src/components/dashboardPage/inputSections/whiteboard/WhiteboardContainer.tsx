@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -15,12 +15,23 @@ import {
   useCreateWhiteboardMutation,
   useGetAllWhiteboardsQuery,
 } from "../../../../generated/graphql";
+import { DayButton } from "./DayButton";
 
 interface WhiteboardContainerProps {}
 
 export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
   const [sendWhiteboard] = useCreateWhiteboardMutation();
   const { data, loading, error } = useGetAllWhiteboardsQuery();
+  const [displayDay, setDisplayDay] = useState<string>("Monday");
+  const weekDays = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
 
   // Notification
   const toast = useToast();
@@ -53,6 +64,9 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
   const initialValues = getInitialValues(data.getAllWhiteboards);
   return (
     <Box w="100%">
+      <Text pl="20px" fontSize="5xl">
+        Whiteboard
+      </Text>
       <Formik
         initialValues={{
           ...initialValues,
@@ -87,18 +101,23 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
       >
         {({ isSubmitting }) => (
           <Form noValidate>
-            <Grid templateColumns="repeat(4, 1fr)" gap={6} p="10px">
-              <DayForm day="Monday" />
-              <DayForm day="Tuesday" />
-              <DayForm day="Wednesday" />
-              <DayForm day="Thursday" />
-              <DayForm day="Friday" />
-              <DayForm day="Saturday" />
-              <DayForm day="Sunday" />
+            <Grid templateColumns="30% 70%">
+              <Box>
+                {weekDays.map((day) => {
+                  return (
+                    <DayButton setState={setDisplayDay} key={day} day={day} />
+                  );
+                })}
+                <Button ml="20px" type="submit" isLoading={isSubmitting}>
+                  Save changes
+                </Button>
+              </Box>
+              <Box>
+                {weekDays.map((day) => {
+                  return <DayForm key={day} display={displayDay} day={day} />;
+                })}
+              </Box>
             </Grid>
-            <Button type="submit" isLoading={isSubmitting}>
-              Save changes
-            </Button>
           </Form>
         )}
       </Formik>

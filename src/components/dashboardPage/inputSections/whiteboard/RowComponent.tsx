@@ -1,3 +1,4 @@
+import { Box } from "@chakra-ui/core";
 import React from "react";
 import { StandardInput } from "../InputFields/StandardInput";
 import { WorkoutInput } from "../InputFields/WorkoutInput";
@@ -14,7 +15,7 @@ export const RowComponent: React.FC<RowComponentProps> = ({
   textField,
 }) => {
   return (
-    <>
+    <Box w="100%">
       <StandardInput
         name={titleField}
         placeholder="Warm-up"
@@ -22,6 +23,6 @@ export const RowComponent: React.FC<RowComponentProps> = ({
         type="text"
       />
       <WorkoutInput id={id} name={textField} label={textField} />
-    </>
+    </Box>
   );
 };

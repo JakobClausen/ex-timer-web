@@ -5,12 +5,15 @@ import { CategoryField } from "../InputFields/CategoryInput";
 
 interface DayFormProps {
   day: string;
+  display: string;
 }
 
-export const DayForm: React.FC<DayFormProps> = ({ day }) => {
+export const DayForm: React.FC<DayFormProps> = ({ day, display }) => {
+  if (display !== day) {
+    return null;
+  }
   return (
-    <Box m="30px">
-      <h3>{day}</h3>
+    <Box w="70%">
       <CategoryField name={`${day}.category`} />
       <RowComponent
         id="m-1"
