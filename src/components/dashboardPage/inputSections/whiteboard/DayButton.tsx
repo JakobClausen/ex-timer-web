@@ -7,8 +7,6 @@ interface DayButtonProps {
 }
 
 export const DayButton: React.FC<DayButtonProps> = ({ day, setState }) => {
-  console.log(setState);
-
   return (
     <PseudoBox
       as="p"
@@ -16,6 +14,7 @@ export const DayButton: React.FC<DayButtonProps> = ({ day, setState }) => {
       fontSize="xl"
       pl="20px"
       _hover={{ textDecoration: "underline" }}
+      _active={{ textDecoration: "underline" }}
       onClick={() => setState(day)}
     >
       {day}
