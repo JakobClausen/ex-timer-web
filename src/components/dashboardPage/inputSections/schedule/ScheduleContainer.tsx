@@ -10,7 +10,7 @@ interface ScheduleContainerProps {}
 export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const [createSchedule] = useCreateScheduleMutation();
   return (
-    <Box w="100%">
+    <Box w="100%" minH="100vh">
       <Formik
         initialValues={{
           ...initialValues,
@@ -33,7 +33,9 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
             <ScheduleDay day="Friday" />
             <ScheduleDay day="Saturday" />
             <ScheduleDay day="Sunday" />
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" m="5vh 0 0 5vw">
+              Save changes
+            </Button>
           </Form>
         )}
       </Formik>

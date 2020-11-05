@@ -8,7 +8,11 @@ interface ScheduleDayProps {
 export const ScheduleDay: React.FC<ScheduleDayProps> = ({ day }) => {
   return (
     <>
-      <ScheduleInput startTime={`${day}.classes[0].startTime`} endTime />
+      <ScheduleInput
+        text={day}
+        startTime={`${day}.classes[0].startTime`}
+        endTime
+      />
     </>
   );
 };
