@@ -1,5 +1,13 @@
 import React from "react";
-import { Box, Button, Grid } from "@chakra-ui/core";
+import {
+  Box,
+  Button,
+  Flex,
+  Grid,
+  Spinner,
+  Text,
+  useToast,
+} from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 import { DayForm } from "./DayForm";
 import { getInitialValues } from "./initialValues";
@@ -14,19 +22,27 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
   const [sendWhiteboard] = useCreateWhiteboardMutation();
   const { data, loading, error } = useGetAllWhiteboardsQuery();
 
+  // Notification
+  const toast = useToast();
+
   if (loading) {
     return (
-      <>
-        <Box w="100%" h="100%">
-          <h1>Loading</h1>
-        </Box>
-      </>
+      <Flex w="100%" h="100vh" justifyContent="center" alignItems="center">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
     );
   }
+
   if (error) {
     return (
       <>
-        <h1>Error</h1>{" "}
+        <Text>Error</Text>
       </>
     );
   }
@@ -35,9 +51,6 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
   }
 
   const initialValues = getInitialValues(data.getAllWhiteboards);
-
-  console.log(initialValues);
-
   return (
     <Box w="100%">
       <Formik
@@ -45,12 +58,31 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
           ...initialValues,
         }}
         onSubmit={async (values, { setErrors }) => {
-          console.log(values);
-          await sendWhiteboard({
+          const response = await sendWhiteboard({
             variables: {
               data: { ...values },
             },
           });
+          if (response.data) {
+            toast({
+              position: "top",
+              title: "Schedule sent",
+              description: "Your schedule was created",
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
+          if (response.errors) {
+            toast({
+              position: "top",
+              title: "Something went wrong",
+              description: "Try again!",
+              status: "error",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
         }}
       >
         {({ isSubmitting }) => (

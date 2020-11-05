@@ -1,5 +1,5 @@
-import { Box, Grid } from "@chakra-ui/core";
-import React, { useEffect, useState } from "react";
+import { Box, Flex, Grid, Spinner } from "@chakra-ui/core";
+import React from "react";
 import { Workout } from "./Workout";
 import { BoardDivider } from "./BoardDivider";
 import { useGetWhiteboardQuery } from "../../../../../generated/graphql";
@@ -11,32 +11,42 @@ export const Whiteboard: React.FC<WhiteboardProps> = () => {
     variables: { day: "Monday" },
   });
 
-  const [workouts, setWorkouts] = useState<any | boolean>(loading);
-
-  useEffect(() => {
-    setWorkouts({
-      workoutOne: data?.getWhiteboard.workout[0],
-      workoutTwo: data?.getWhiteboard.workout[2],
-      workoutThree: data?.getWhiteboard.workout[1],
-    });
-  }, [data]);
+  if (loading) {
+    return (
+      <Flex
+        h="100%"
+        bg="white"
+        borderRadius="10px"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <Box h="100%" bg="white" borderRadius="10px" position="relative">
       <Grid templateColumns="repeat(3, 33%)">
         <Workout
-          title={loading ? loading : workouts.workoutOne?.title}
-          workout={loading ? loading : workouts.workoutOne?.workout}
+          title={data?.getWhiteboard.workout[0].title}
+          workout={data?.getWhiteboard.workout[0].workout}
         />
         <BoardDivider positionProp="33%" />
         <Workout
-          title={loading ? loading : workouts.workoutTwo?.title}
-          workout={loading ? loading : workouts.workoutTwo?.workout}
+          title={data?.getWhiteboard.workout[1].title}
+          workout={data?.getWhiteboard.workout[1].workout}
         />
         <BoardDivider positionProp="66%" />
         <Workout
-          title={loading ? loading : workouts.workoutThree?.title}
-          workout={loading ? loading : workouts.workoutThree?.workout}
+          title={data?.getWhiteboard.workout[2].title}
+          workout={data?.getWhiteboard.workout[2].workout}
         />
       </Grid>
     </Box>
