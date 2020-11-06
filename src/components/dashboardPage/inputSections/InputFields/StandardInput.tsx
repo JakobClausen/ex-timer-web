@@ -26,10 +26,10 @@ export const StandardInput: React.FC<StandardInputProps> = (props) => {
         </FormLabel>
         <Input
           fontSize="15px"
-          w="60px"
+          w="160px"
+          h="25px"
           pl="5px"
           m="0"
-          h="25px"
           {...field}
           id={field.name}
           placeholder={props.placeholder}

@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/core";
+import { Box, Text } from "@chakra-ui/core";
 import React from "react";
 import { RowComponent } from "./RowComponent";
 import { CategoryField } from "../InputFields/CategoryInput";
@@ -13,7 +13,8 @@ export const DayForm: React.FC<DayFormProps> = ({ day, display }) => {
     return null;
   }
   return (
-    <Box w="70%">
+    <Box w="90%">
+      <Text fontSize="2xl">{day}</Text>
       <CategoryField name={`${day}.category`} />
       <RowComponent
         id="m-1"

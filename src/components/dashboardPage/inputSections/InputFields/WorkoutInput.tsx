@@ -20,13 +20,17 @@ export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
   return (
     <FormControl isInvalid={!!error}>
       <Flex m="20px 0px">
-        <FormLabel color="black" htmlFor={field.name}>
+        <FormLabel color="black" display="none" htmlFor={field.name}>
           Workout
         </FormLabel>
         <Textarea
+          borderRadius="none"
+          textAlign="center"
+          fontSize="14px"
           pl="5px"
           resize="none"
-          h="125px"
+          h="450px"
+          w="300px"
           {...field}
           id={props.id}
           type="text"
