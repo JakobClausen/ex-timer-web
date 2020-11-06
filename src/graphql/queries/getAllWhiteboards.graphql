@@ -1,9 +1,12 @@
 query GetAllWhiteboards {
   getAllWhiteboards {
     day
+    order
     workout {
       title
       workout
+      order
+      category_id
     }
   }
 }

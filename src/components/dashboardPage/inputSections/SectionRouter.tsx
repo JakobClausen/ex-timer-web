@@ -10,6 +10,7 @@ export const SectionRouter: React.FC<SectionRouterProps> = () => {
   return (
     <Box
       w="85%"
+      minH="100%"
       bg="#E2E2E2"
       position="absolute"
       right="0"

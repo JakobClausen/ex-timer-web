@@ -1,46 +1,41 @@
-import React, { InputHTMLAttributes, useEffect, useState } from "react";
+import React, { InputHTMLAttributes } from "react";
 import {
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
   Textarea,
 } from "@chakra-ui/core";
 import { useField } from "formik";
-import removeMd from "remove-markdown";
 
 type WorkoutInputProps = InputHTMLAttributes<HTMLInputElement> & {
   name: string;
   label: string;
   id: string;
-  preWorkout: string | undefined;
 };
 
 export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
   const [field, { error }] = useField(props);
 
-  const [workout, setWorkout] = useState("");
-
-  useEffect(() => {
-    setWorkout(removeMd(props.preWorkout ? props.preWorkout : ""));
-  }, [props.preWorkout]);
-
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel color="black" htmlFor={field.name}>
-        Workout
-      </FormLabel>
-      <Textarea
-        pl="5px"
-        resize="none"
-        h="125px"
-        {...field}
-        id={props.id}
-        type="text"
-        // onChange={(e: any) => {
-        //   setWorkout(e.target.value);
-        // }}
-        // value={workout}
-      />
+      <Flex m="20px 0px">
+        <FormLabel color="black" display="none" htmlFor={field.name}>
+          Workout
+        </FormLabel>
+        <Textarea
+          borderRadius="none"
+          textAlign="center"
+          fontSize="14px"
+          pl="5px"
+          resize="none"
+          h="450px"
+          w="300px"
+          {...field}
+          id={props.id}
+          type="text"
+        />
+      </Flex>
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>
   );
