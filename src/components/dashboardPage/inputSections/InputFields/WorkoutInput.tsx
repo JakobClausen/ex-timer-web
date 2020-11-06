@@ -1,5 +1,6 @@
 import React, { InputHTMLAttributes } from "react";
 import {
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -18,17 +19,19 @@ export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
 
   return (
     <FormControl isInvalid={!!error}>
-      <FormLabel color="black" htmlFor={field.name}>
-        Workout
-      </FormLabel>
-      <Textarea
-        pl="5px"
-        resize="none"
-        h="125px"
-        {...field}
-        id={props.id}
-        type="text"
-      />
+      <Flex m="20px 0px">
+        <FormLabel color="black" htmlFor={field.name}>
+          Workout
+        </FormLabel>
+        <Textarea
+          pl="5px"
+          resize="none"
+          h="125px"
+          {...field}
+          id={props.id}
+          type="text"
+        />
+      </Flex>
       {error ? <FormErrorMessage>{error}</FormErrorMessage> : null}
     </FormControl>
   );

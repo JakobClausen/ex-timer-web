@@ -214,7 +214,7 @@ export type DaysInput = {
 
 export type WhiteboardInput = {
   day: Scalars['String'];
-  category: Scalars['Int'];
+  category: Scalars['String'];
   order: Scalars['Int'];
   one: RowField;
   two: RowField;

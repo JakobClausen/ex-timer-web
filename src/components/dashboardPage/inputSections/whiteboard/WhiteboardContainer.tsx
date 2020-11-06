@@ -10,7 +10,7 @@ import {
 } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 import { DayForm } from "./DayForm";
-import { getInitialValues } from "./initialValues";
+import { getInitialValues } from "../../../../utils/initialValues";
 import {
   useCreateWhiteboardMutation,
   useGetAllWhiteboardsQuery,

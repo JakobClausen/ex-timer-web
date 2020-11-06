@@ -15,7 +15,7 @@ export const getInitialValues = (days: any) => {
     let x = weekDays.map((day, index) => {
       return {
         day,
-        category: 1,
+        category: "1",
         order: index,
         one: {
           title: "",
@@ -49,7 +49,7 @@ export const getInitialValues = (days: any) => {
   let x = days.map((day: any) => {
     return {
       day: day.day,
-      category: 1,
+      category: day.workout[0].category_id.toString(),
       order: day.order,
       one: {
         title: removeMd(day.workout[0].title),
