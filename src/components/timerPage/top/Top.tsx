@@ -7,7 +7,7 @@ interface TopProps {}
 
 export const Top: React.FC<TopProps> = () => {
   return (
-    <Box p="0px 30px ">
+    <Box p="20px 30px" position="relative">
       <Logo />
       <Clock />
     </Box>

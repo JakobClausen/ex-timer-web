@@ -1,34 +1,20 @@
-import { Box, Flex, Grid, Spinner } from "@chakra-ui/core";
-import React from "react";
+import { Box, Grid } from "@chakra-ui/core";
+import React, { useContext } from "react";
 import { Workout } from "./Workout";
 import { BoardDivider } from "./BoardDivider";
 import { useGetWhiteboardQuery } from "../../../../../generated/graphql";
+import { TimeContext } from "../../../TimeContext";
 
 interface WhiteboardProps {}
 
 export const Whiteboard: React.FC<WhiteboardProps> = () => {
+  const { today } = useContext(TimeContext);
   const { data, loading } = useGetWhiteboardQuery({
-    variables: { day: "Monday" },
+    variables: { day: today },
   });
 
   if (loading) {
-    return (
-      <Flex
-        h="100%"
-        bg="white"
-        borderRadius="10px"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
-    );
+    return null;
   }
 
   return (

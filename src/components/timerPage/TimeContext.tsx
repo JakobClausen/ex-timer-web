@@ -1,3 +1,8 @@
 import { createContext } from "react";
 
-export const TimeContext = createContext({ clock: "", today: "" });
+export const TimeContext = createContext({
+  clock: "",
+  today: "",
+  date: "",
+  classActive: false,
+});

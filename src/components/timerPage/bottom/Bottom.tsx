@@ -3,13 +3,15 @@ import React from "react";
 import { Left } from "./left/Left";
 import { Right } from "./right/Right";
 
-interface BottomProps {}
+interface BottomProps {
+  schedule: any;
+}
 
-export const Bottom: React.FC<BottomProps> = () => {
+export const Bottom: React.FC<BottomProps> = ({ schedule }) => {
   return (
     <Box w="100%">
       <Grid templateColumns="35% 65%" h="100%">
-        <Left />
+        <Left schedule={schedule} />
         <Right />
       </Grid>
     </Box>
