@@ -1,27 +1,67 @@
-import { Box } from "@chakra-ui/core";
+import { Box, Flex, Spinner, Text } from "@chakra-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { NextClass } from "./schedule/NextClass";
-import { CurrentClass } from "./schedule/CurrentClass";
-import { useGetDayScheduleQuery } from "../../../../generated/graphql";
 import { TimeContext } from "../../TimeContext";
+import { ActiveClass } from "./schedule/ActiveClass";
+import { getNextClassIndex } from "../../../../utils/nextClassIndex";
 
-interface LeftProps {}
+interface LeftProps {
+  schedule: any;
+}
 
-export const Left: React.FC<LeftProps> = () => {
-  const { today } = useContext(TimeContext);
-
-  const { data } = useGetDayScheduleQuery({
-    variables: { day: today },
-  });
-  const [schedule, setSchedule] = useState<any>(null);
+export const Left: React.FC<LeftProps> = ({ schedule }) => {
+  const { clock, classActive } = useContext(TimeContext);
+  const [nextClassIndex, setNextClassIndex] = useState<number>(0);
 
   useEffect(() => {
-    setSchedule(data?.getDaySchedule[0].gymClass[0]);
-  }, [data]);
+    setNextClassIndex(getNextClassIndex(schedule, classActive));
+  }, [schedule, classActive]);
+
+  if (!schedule) {
+    return (
+      <Flex
+        h="100%"
+        borderRadius="10px"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
+
   return (
-    <Box p="0px 30px 30px 30px">
-      <CurrentClass />
-      <NextClass />
-    </Box>
+    <Flex p="0px 30px 30px 30px" flexDirection="column" justify="space-between">
+      {classActive ? (
+        <ActiveClass
+          times={{
+            start_time: schedule[0].start_time,
+            end_time: schedule[0].end_time,
+          }}
+        />
+      ) : (
+        <Text fontSize="2xl" color="white">
+          {clock}
+        </Text>
+      )}
+      {(schedule.length === 1 && classActive) ||
+      (schedule.length === 1 && !classActive) ||
+      schedule.length === 0 ? (
+        <Box color="white">No more classes today</Box>
+      ) : (
+        <NextClass
+          times={{
+            start_time: schedule[nextClassIndex].start_time,
+            end_time: schedule[nextClassIndex].end_time,
+          }}
+        />
+      )}
+    </Flex>
   );
 };

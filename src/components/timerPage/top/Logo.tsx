@@ -7,7 +7,7 @@ interface LogoProps {}
 export const Logo: React.FC<LogoProps> = () => {
   return (
     <Flex justifyContent="center">
-      <Image src={logo} alt="logo" w="30%" />
+      <Image src={logo} alt="logo" w="30vw" />
     </Flex>
   );
 };

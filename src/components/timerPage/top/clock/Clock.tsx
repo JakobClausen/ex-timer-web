@@ -1,10 +1,26 @@
-import { Box } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/core";
 import React, { useContext } from "react";
 import { TimeContext } from "../../TimeContext";
 
 interface ClockProps {}
 
 export const Clock: React.FC<ClockProps> = () => {
-  const { clock } = useContext(TimeContext);
-  return <Box color="white">{clock}</Box>;
+  const { clock, classActive } = useContext(TimeContext);
+  return (
+    <>
+      {classActive && (
+        <Flex
+          justify="center"
+          flexDirection="column"
+          position="absolute"
+          top="0px"
+          h="100%"
+        >
+          <Text color="white" fontSize="5xl">
+            {clock}
+          </Text>
+        </Flex>
+      )}
+    </>
+  );
 };
