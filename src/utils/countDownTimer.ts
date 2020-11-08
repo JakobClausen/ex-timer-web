@@ -11,9 +11,9 @@ export const countDownTimer = (end: string) => {
   let distance = endTime.getTime() - new Date().getTime();
 
   // Hour
-  let scheduleHours = Math.floor(
-    (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-  );
+  // let scheduleHours = Math.floor(
+  //   (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  // );
 
   // Minutes
   let scheduleMinutes =

@@ -3,6 +3,7 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { WhiteboardContainer } from "./whiteboard/WhiteboardContainer";
 import { ScheduleContainer } from "./schedule/ScheduleContainer";
+import { SettingsPage } from "./settingsPage/SettingsPage";
 
 interface SectionRouterProps {}
 
@@ -22,6 +23,9 @@ export const SectionRouter: React.FC<SectionRouterProps> = () => {
       </Route>
       <Route path="/dashboard/whiteboard">
         <WhiteboardContainer />
+      </Route>
+      <Route path="/dashboard/settings">
+        <SettingsPage />
       </Route>
     </Box>
   );
