@@ -1,6 +1,6 @@
 import { Flex, Text } from "@chakra-ui/core";
 import React, { useContext } from "react";
-import { TimeContext } from "../../TimeContext";
+import { TimeContext } from "../../../context/TimeContext";
 
 interface ClockProps {}
 

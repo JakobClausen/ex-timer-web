@@ -5,21 +5,19 @@ import { ChangePassword } from "./components/auth/changePassword";
 import { TimerPage } from "./components/timerPage/TimerPage";
 import { AuthPage } from "./components/authPage/AuthPage";
 import { Flex } from "@chakra-ui/core";
-import { easterEggContext } from "./settings";
+import { christmasContext } from "./components/context/christmasContext";
 
 interface appProps {}
 
 const App: React.FC<appProps> = () => {
-  const [isEasterEgg, setIsEasterEgg] = useState(false);
-
-  console.log(isEasterEgg);
+  const [isChristmasMode, setChristmasMode] = useState(false);
 
   return (
     <Router>
-      <easterEggContext.Provider
+      <christmasContext.Provider
         value={{
-          isEasterEgg,
-          setIsEasterEgg,
+          isChristmasMode,
+          setChristmasMode,
         }}
       >
         <Flex
@@ -42,7 +40,7 @@ const App: React.FC<appProps> = () => {
             <TimerPage />
           </Route>
         </Flex>
-      </easterEggContext.Provider>
+      </christmasContext.Provider>
     </Router>
   );
 };

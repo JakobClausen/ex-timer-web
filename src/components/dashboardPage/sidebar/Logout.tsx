@@ -9,9 +9,8 @@ export const Logout: React.FC<LogoutProps> = () => {
   const history = useHistory();
   const [logMeOut] = useLogoutMutation();
   return (
-    <Box pos="absolute" bottom="0px">
+    <Box pos="absolute" bottom="0px" m="20px">
       <Button
-        mb="20px"
         cursor="pointer"
         onClick={() => {
           logMeOut();

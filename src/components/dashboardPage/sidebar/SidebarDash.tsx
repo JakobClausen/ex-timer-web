@@ -2,7 +2,6 @@ import { Box, Text } from "@chakra-ui/core";
 import React from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { HeyText } from "./HeyText";
-import { Logout } from "./Logout";
 import { SectionButton } from "./SectionButton";
 import { Settings } from "./Settings";
 import { Link } from "react-router-dom";
@@ -18,7 +17,6 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
       top="0"
       left="0"
       bg="darkBlue"
-      w="15%"
       height="100%"
       p="0px 20px"
     >
@@ -31,8 +29,6 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
       <Link style={{ textDecoration: "none", color: "#DFDFDF" }} to="/timer">
         <Text mt="10px">Open timer</Text>
       </Link>
-
-      <Logout />
     </Box>
   );
 };

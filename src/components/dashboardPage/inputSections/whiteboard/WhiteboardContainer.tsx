@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Spinner,
-  Text,
-  useToast,
-} from "@chakra-ui/core";
+import { Box, Button, Grid, Text, useToast } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 import { DayForm } from "./DayForm";
 import { getInitialValues } from "../../../../utils/initialValues";
@@ -16,6 +8,8 @@ import {
   useGetAllWhiteboardsQuery,
 } from "../../../../generated/graphql";
 import { DayButton } from "./DayButton";
+import { Loading } from "../../../loading-error/Loading";
+import { Error } from "../../../loading-error/Error";
 
 interface WhiteboardContainerProps {}
 
@@ -38,23 +32,17 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
 
   if (loading) {
     return (
-      <Flex w="100%" h="100vh" justifyContent="center" alignItems="center">
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
+      <Box h="100vh" w="100%">
+        <Loading />
+      </Box>
     );
   }
 
   if (error) {
     return (
-      <>
-        <Text>Error</Text>
-      </>
+      <Box h="100vh" w="100%">
+        <Error />
+      </Box>
     );
   }
   if (!data) {
@@ -101,8 +89,8 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
       >
         {({ isSubmitting }) => (
           <Form noValidate>
-            <Grid templateColumns="30% 70%">
-              <Box>
+            <Grid templateColumns="30% 70%" pr="20px">
+              <Box w="100%">
                 {weekDays.map((day) => {
                   return (
                     <DayButton setState={setDisplayDay} key={day} day={day} />
@@ -112,7 +100,7 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
                   Save changes
                 </Button>
               </Box>
-              <Box>
+              <Box w="100%">
                 {weekDays.map((day) => {
                   return <DayForm key={day} display={displayDay} day={day} />;
                 })}

@@ -20,13 +20,18 @@ export const StandardInput: React.FC<StandardInputProps> = (props) => {
 
   return (
     <FormControl isInvalid={!!error}>
-      <Flex m="20px 0px">
-        <FormLabel fontSize="22px" color="black" htmlFor={field.name}>
-          {props.label}
+      <Flex align="center" pr="10px">
+        <FormLabel
+          fontFamily="body"
+          fontSize="18px"
+          color="black"
+          htmlFor={field.name}
+        >
+          {`${props.label}:`}
         </FormLabel>
         <Input
           fontSize="15px"
-          w="160px"
+          flex="end"
           h="25px"
           pl="5px"
           m="0"

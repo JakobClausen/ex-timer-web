@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { Workout } from "./Workout";
 import { BoardDivider } from "./BoardDivider";
 import { useGetWhiteboardQuery } from "../../../../../generated/graphql";
-import { TimeContext } from "../../../TimeContext";
+import { TimeContext } from "../../../../context/TimeContext";
 
 interface WhiteboardProps {}
 

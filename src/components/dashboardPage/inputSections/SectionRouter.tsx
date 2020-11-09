@@ -3,14 +3,13 @@ import React from "react";
 import { Route } from "react-router-dom";
 import { WhiteboardContainer } from "./whiteboard/WhiteboardContainer";
 import { ScheduleContainer } from "./schedule/ScheduleContainer";
-import { SettingsPage } from "./settingsPage/SettingsPage";
+import { SettingsContainer } from "./settingsPage/SettingsContainer";
 
 interface SectionRouterProps {}
 
 export const SectionRouter: React.FC<SectionRouterProps> = () => {
   return (
     <Box
-      w="85%"
       minH="100%"
       bg="#E2E2E2"
       position="absolute"
@@ -18,6 +17,11 @@ export const SectionRouter: React.FC<SectionRouterProps> = () => {
       top="0"
       boxShadow="5px 10px 40px 3px rgba(0, 0, 0, 0.8), -5px -5px 25px 0.5px rgba(255, 255, 255, 0.3)"
     >
+      <Route exact path="/dashboard">
+        <Box w="100%" h="100%">
+          hey
+        </Box>
+      </Route>
       <Route path="/dashboard/schedule">
         <ScheduleContainer />
       </Route>
@@ -25,7 +29,7 @@ export const SectionRouter: React.FC<SectionRouterProps> = () => {
         <WhiteboardContainer />
       </Route>
       <Route path="/dashboard/settings">
-        <SettingsPage />
+        <SettingsContainer />
       </Route>
     </Box>
   );

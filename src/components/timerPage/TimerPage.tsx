@@ -1,14 +1,15 @@
-import { Box, Flex, Grid, Spinner } from "@chakra-ui/core";
+import { Box, Grid } from "@chakra-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { Bottom } from "./bottom/Bottom";
 import { Top } from "./top/Top";
-import { TimeContext } from "./TimeContext";
+import { TimeContext } from "../context/TimeContext";
 import { format } from "date-fns";
 import { futureClasses } from "../../utils/futureClasses";
 import { useGetDayScheduleQuery } from "../../generated/graphql";
 import { isClassActive } from "../../utils/isClassActive";
 import Snowfall from "react-snowfall";
-import { easterEggContext } from "../../settings";
+import { christmasContext } from "../context/christmasContext";
+import { Loading } from "../loading-error/Loading";
 
 interface TimerPageProps {}
 
@@ -18,7 +19,7 @@ export const TimerPage: React.FC<TimerPageProps> = () => {
   const [date, setDate] = useState("");
   const [classActive, setClassActive] = useState<boolean>(false);
   const [schedule, setSchedule] = useState<any>();
-  const { isEasterEgg } = useContext(easterEggContext);
+  const { isChristmasMode } = useContext(christmasContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,29 +60,14 @@ export const TimerPage: React.FC<TimerPageProps> = () => {
   }, [clock, data]);
 
   if (loading || !data) {
-    return (
-      <Flex
-        h="100%"
-        borderRadius="10px"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
-    );
+    return <Loading />;
   }
 
   return (
     <Box w="100%" h="100vh" bg="darkGray">
       <Grid templateRows="min-content auto" h="100%" w="100%">
         <TimeContext.Provider value={{ clock, today, date, classActive }}>
-          {isEasterEgg && <Snowfall />}
+          {isChristmasMode && <Snowfall />}
           <Top />
           <Bottom schedule={schedule} />
         </TimeContext.Provider>

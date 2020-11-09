@@ -1,9 +1,10 @@
-import { Box, Flex, Spinner, Text } from "@chakra-ui/core";
+import { Box, Flex, Text } from "@chakra-ui/core";
 import React, { useContext, useEffect, useState } from "react";
 import { NextClass } from "./schedule/NextClass";
-import { TimeContext } from "../../TimeContext";
+import { TimeContext } from "../../../context/TimeContext";
 import { ActiveClass } from "./schedule/ActiveClass";
 import { getNextClassIndex } from "../../../../utils/nextClassIndex";
+import { Loading } from "../../../loading-error/Loading";
 
 interface LeftProps {
   schedule: any;
@@ -18,26 +19,16 @@ export const Left: React.FC<LeftProps> = ({ schedule }) => {
   }, [schedule, classActive]);
 
   if (!schedule) {
-    return (
-      <Flex
-        h="100%"
-        borderRadius="10px"
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
-    );
+    return <Loading />;
   }
 
   return (
-    <Flex p="0px 30px 30px 30px" flexDirection="column" justify="space-between">
+    <Flex
+      p="0px 30px 30px 30px"
+      flexDirection="column"
+      justify="space-between"
+      zIndex={10}
+    >
       {classActive ? (
         <ActiveClass
           times={{

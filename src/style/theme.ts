@@ -10,6 +10,7 @@ export default {
   },
   fonts: {
     ...defaultTheme.fonts,
-    // add font
+    heading: "Roboto, sans-serif",
+    body: "Roboto, sans-serif",
   },
 };
