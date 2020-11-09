@@ -1,26 +1,30 @@
 import { Box, Flex } from "@chakra-ui/core";
 import React from "react";
-import { Route } from "react-router-dom";
 import { ForgotPassword } from "../auth/forgotPassword/ForgotPassword";
-import Login from "../auth/Login";
 import Register from "../auth/Register";
+import { Route } from "react-router-dom";
+import Login from "../auth/Login";
+import { ChangePassword } from "../auth/changePassword";
 
 interface AuthPageProps {}
 
 export const AuthPage: React.FC<AuthPageProps> = () => {
   return (
-    <Box h="100vh">
-      <Flex>
-        <Route exact path="/">
+    <Flex justify="center" align="center" w="100%" h="100%" fontFamily="body">
+      <Box>
+        <Route path="/auth/login">
           <Login />
         </Route>
-        <Route exact path="/signup">
+        <Route path="/auth/signup">
           <Register />
         </Route>
-        <Route exact path="/forgot-password">
+        <Route path="/auth/forgot-password">
           <ForgotPassword />
         </Route>
-      </Flex>
-    </Box>
+        <Route path="/reset-password/:token">
+          <ChangePassword />
+        </Route>
+      </Box>
+    </Flex>
   );
 };

@@ -61,14 +61,17 @@ const Login: React.FC<loginProps> = () => {
       </Formik>
       <Box>
         <Box mt="4">
-          <Link style={{ color: "white", textDecoration: "none" }} to="/signup">
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/auth/signup"
+          >
             Sign up
           </Link>
         </Box>
         <Box mt="4">
           <Link
             style={{ color: "white", textDecoration: "none" }}
-            to="/forgot-password"
+            to="/auth/forgot-password"
           >
             Forgot Password
           </Link>

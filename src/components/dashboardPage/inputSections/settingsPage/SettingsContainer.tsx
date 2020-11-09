@@ -7,7 +7,7 @@ interface SettingsContainerProps {}
 
 export const SettingsContainer: React.FC<SettingsContainerProps> = () => {
   return (
-    <Box w="100%" minHeight="100%">
+    <Box w="100%">
       <Text ml="20px" fontSize="5xl">
         Settings
       </Text>

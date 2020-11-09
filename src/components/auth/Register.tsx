@@ -73,14 +73,17 @@ const Register: React.FC<RegisterProps> = () => {
       </Formik>
       <Box>
         <Box mt="4">
-          <Link style={{ color: "white", textDecoration: "none" }} to="/">
+          <Link
+            style={{ color: "white", textDecoration: "none" }}
+            to="/auth/login"
+          >
             Login
           </Link>
         </Box>
         <Box mt="4">
           <Link
             style={{ color: "white", textDecoration: "none" }}
-            to="/forgot-password"
+            to="/auth/forgot-password"
           >
             Forgot Password
           </Link>

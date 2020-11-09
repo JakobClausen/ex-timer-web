@@ -1,4 +1,4 @@
-import { Box, Grid, Text } from "@chakra-ui/core";
+import { Grid, Text } from "@chakra-ui/core";
 import React from "react";
 import { RowComponent } from "./RowComponent";
 import { CategoryField } from "../InputFields/CategoryInput";
