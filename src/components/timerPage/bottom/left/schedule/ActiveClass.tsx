@@ -1,6 +1,6 @@
 import { Flex, Stack, Text } from "@chakra-ui/core";
 import React, { useContext, useEffect, useState } from "react";
-import { TimeContext } from "../../../TimeContext";
+import { TimeContext } from "../../../../context/TimeContext";
 import { StartEndInterface } from "./scheduleInterface";
 import { countDownTimer } from "../../../../../utils/countDownTimer";
 

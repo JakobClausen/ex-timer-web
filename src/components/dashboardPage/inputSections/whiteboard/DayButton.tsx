@@ -1,9 +1,9 @@
 import { PseudoBox } from "@chakra-ui/core";
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface DayButtonProps {
   day: string;
-  setState: any;
+  setState: Dispatch<SetStateAction<string>>;
 }
 
 export const DayButton: React.FC<DayButtonProps> = ({ day, setState }) => {
@@ -11,6 +11,7 @@ export const DayButton: React.FC<DayButtonProps> = ({ day, setState }) => {
     <PseudoBox
       as="p"
       cursor="pointer"
+      fontFamily="body"
       fontSize="xl"
       pl="20px"
       _hover={{ textDecoration: "underline" }}

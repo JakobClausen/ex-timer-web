@@ -18,11 +18,12 @@ export const CategoryField: React.FC<CategoryFieldProps> = (props) => {
   return (
     <FormControl isInvalid={!!error}>
       <Flex m="20px 0px">
-        <FormLabel color="black" htmlFor={field.name}>
+        <FormLabel fontFamily="body" color="black" htmlFor={field.name}>
           Category:
         </FormLabel>
         <RadioGroup
           defaultValue="1"
+          fontFamily="body"
           spacing={5}
           isInline
           id={field.name}

@@ -26,11 +26,12 @@ export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
         <Textarea
           borderRadius="none"
           textAlign="center"
+          fontFamily="body"
           fontSize="14px"
           pl="5px"
           resize="none"
           h="450px"
-          w="300px"
+          w="100%"
           {...field}
           id={props.id}
           type="text"

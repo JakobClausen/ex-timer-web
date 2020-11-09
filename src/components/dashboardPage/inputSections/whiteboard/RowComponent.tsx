@@ -15,7 +15,7 @@ export const RowComponent: React.FC<RowComponentProps> = ({
   textField,
 }) => {
   return (
-    <Box display="inline-block">
+    <Box display="inline-block" w="100%">
       <StandardInput
         name={titleField}
         placeholder="Warm-up"
