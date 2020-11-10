@@ -44,18 +44,12 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
       </Formik>
       <Box>
         <Box mt="4">
-          <Link
-            style={{ color: "white", textDecoration: "none" }}
-            to="/auth/login"
-          >
+          <Link style={{ color: "white", textDecoration: "none" }} to="/">
             Login
           </Link>
         </Box>
         <Box mt="4">
-          <Link
-            style={{ color: "white", textDecoration: "none" }}
-            to="/auth/signup"
-          >
+          <Link style={{ color: "white", textDecoration: "none" }} to="/signup">
             Sign up
           </Link>
         </Box>

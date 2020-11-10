@@ -11,7 +11,7 @@ export const ChristmasMode: React.FC<ChristmasModeProps> = () => {
   return (
     <Flex
       w="200px"
-      bg="grey"
+      bg="#e4e4e4"
       borderRadius="10px"
       p="20px"
       align="center"

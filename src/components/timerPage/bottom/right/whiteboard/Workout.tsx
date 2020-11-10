@@ -12,10 +12,10 @@ export const Workout: React.FC<WorkoutProps> = ({ title, workout }) => {
   return (
     <Box p="20px" textAlign="center">
       <Stack>
-        <Heading as="h3" size="lg">
+        <Heading as="h3" size="xl" m="0px">
           {ReactHtmlParser(title || "Title")}
         </Heading>
-        {ReactHtmlParser(workout || "")}
+        <Box fontSize="xl">{ReactHtmlParser(workout || "")}</Box>
       </Stack>
     </Box>
   );

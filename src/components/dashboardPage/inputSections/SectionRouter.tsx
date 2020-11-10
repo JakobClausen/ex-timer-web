@@ -4,6 +4,7 @@ import { Route } from "react-router-dom";
 import { WhiteboardContainer } from "./whiteboard/WhiteboardContainer";
 import { ScheduleContainer } from "./schedule/ScheduleContainer";
 import { SettingsContainer } from "./settingsPage/SettingsContainer";
+import { WelcomeSection } from "./WelcomeSection";
 
 interface SectionRouterProps {}
 
@@ -12,13 +13,11 @@ export const SectionRouter: React.FC<SectionRouterProps> = () => {
     <Box
       w="100%"
       minH="100%"
-      bg="#E2E2E2"
+      bg="#f0f0f0"
       boxShadow="5px 10px 40px 3px rgba(0, 0, 0, 0.8), -5px -5px 25px 0.5px rgba(255, 255, 255, 0.3)"
     >
       <Route exact path="/dashboard">
-        <Box w="100%" h="100%">
-          hey
-        </Box>
+        <WelcomeSection />
       </Route>
       <Route exact path="/dashboard/schedule">
         <ScheduleContainer />

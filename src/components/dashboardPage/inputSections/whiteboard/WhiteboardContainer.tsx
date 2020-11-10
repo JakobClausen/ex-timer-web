@@ -93,10 +93,20 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
               <Box w="100%">
                 {weekDays.map((day) => {
                   return (
-                    <DayButton setState={setDisplayDay} key={day} day={day} />
+                    <DayButton
+                      setState={setDisplayDay}
+                      state={displayDay}
+                      key={day}
+                      day={day}
+                    />
                   );
                 })}
-                <Button ml="20px" type="submit" isLoading={isSubmitting}>
+                <Button
+                  cursor="pointer"
+                  ml="20px"
+                  type="submit"
+                  isLoading={isSubmitting}
+                >
                   Save changes
                 </Button>
               </Box>
