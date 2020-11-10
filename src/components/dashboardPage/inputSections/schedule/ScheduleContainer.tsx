@@ -1,42 +1,62 @@
-import { Box, Button } from "@chakra-ui/core";
-import { Form, Formik } from "formik";
-import React from "react";
+import { Box, Button, Grid, Text } from "@chakra-ui/core";
+import React, { useState } from "react";
 import { ScheduleDay } from "./ScheduleDay";
 import initialValues from "./initialValues";
 import { useCreateScheduleMutation } from "../../../../generated/graphql";
+import { DayButton } from "../whiteboard/DayButton";
 
 interface ScheduleContainerProps {}
 
 export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const [createSchedule] = useCreateScheduleMutation();
+  const [displayDay, setDisplayDay] = useState<string>("Monday");
+
+  const weekDays = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+
+  const [classes, setClasses] = useState([
+    {
+      startTime: "",
+      endTime: "",
+      category: null,
+      id: 0,
+    },
+  ]);
+
   return (
     <Box w="100%">
-      <Formik
-        initialValues={{
-          ...initialValues,
-        }}
-        onSubmit={async (values, { setErrors }) => {
-          const response = await createSchedule({
-            variables: {
-              data: { ...values },
-            },
-          });
-          console.log(response);
-        }}
-      >
-        {({ isSubmitting }) => (
-          <Form noValidate>
-            <ScheduleDay day="Monday" />
-            <ScheduleDay day="Tuesday" />
-            <ScheduleDay day="Wednesday" />
-            <ScheduleDay day="Thursday" />
-            <ScheduleDay day="Friday" />
-            <ScheduleDay day="Saturday" />
-            <ScheduleDay day="Sunday" />
-            <Button type="submit">Save changes</Button>
-          </Form>
-        )}
-      </Formik>
+      <Text pl="20px" fontSize="5xl">
+        Schedule
+      </Text>
+      <Grid templateColumns="30% 70%" pr="20px">
+        <Box w="100%">
+          {weekDays.map((day) => {
+            return (
+              <>
+                <DayButton
+                  key={day}
+                  day={day}
+                  setState={setDisplayDay}
+                  state={displayDay}
+                />
+              </>
+            );
+          })}
+          <Button type="submit" ml="20px" cursor="pointer">
+            Submit changes
+          </Button>
+        </Box>
+        <Box w="100%">
+          <Button>Add class</Button>
+        </Box>
+      </Grid>
     </Box>
   );
 };
