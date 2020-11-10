@@ -1,11 +1,9 @@
 import React from "react";
 import { Box, Flex, Grid, Text } from "@chakra-ui/core";
-import { Route } from "react-router-dom";
-import { AuthPage } from "../authPage/AuthPage";
 
 interface FirstPageProps {}
 
-export const FirstPage: React.FC<FirstPageProps> = () => {
+export const FirstPage: React.FC<FirstPageProps> = ({ children }) => {
   return (
     <Box w="100%" h="100%">
       <Grid templateRows="40% 60%" w="100%" h="100%">
@@ -15,9 +13,7 @@ export const FirstPage: React.FC<FirstPageProps> = () => {
           </Text>
         </Flex>
         <Flex justify="center" w="100%" h="100%">
-          <Route path="/auth">
-            <AuthPage />
-          </Route>
+          {children}
         </Flex>
       </Grid>
     </Box>

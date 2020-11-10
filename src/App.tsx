@@ -5,6 +5,9 @@ import { TimerPage } from "./components/timerPage/TimerPage";
 import { Box } from "@chakra-ui/core";
 import { christmasContext } from "./components/context/christmasContext";
 import { FirstPage } from "./components/firstPage/FirstPage";
+import Login from "./components/auth/Login";
+import Register from "./components/auth/Register";
+import { ForgotPassword } from "./components/auth/forgotPassword/ForgotPassword";
 
 interface appProps {}
 
@@ -20,7 +23,19 @@ const App: React.FC<appProps> = () => {
           }}
         >
           <Route exact path="/">
-            <FirstPage />
+            <FirstPage>
+              <Login />
+            </FirstPage>
+          </Route>
+          <Route exact path="/signup">
+            <FirstPage>
+              <Register />
+            </FirstPage>
+          </Route>
+          <Route exact path="/forgot-password">
+            <FirstPage>
+              <ForgotPassword />
+            </FirstPage>
           </Route>
           <Route path="/dashboard">
             <DashboardPage />
