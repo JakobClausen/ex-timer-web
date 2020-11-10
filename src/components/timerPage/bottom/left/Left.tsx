@@ -37,7 +37,7 @@ export const Left: React.FC<LeftProps> = ({ schedule }) => {
           }}
         />
       ) : (
-        <Text fontSize="2xl" color="white">
+        <Text textAlign="center" fontSize="100px" mt="-20px" color="white">
           {clock}
         </Text>
       )}

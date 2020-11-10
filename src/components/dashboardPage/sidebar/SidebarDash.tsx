@@ -1,26 +1,46 @@
-import { Box, Text } from "@chakra-ui/core";
-import React from "react";
+import { Box, Button, Flex } from "@chakra-ui/core";
+import React, { useState } from "react";
 import { useMeQuery } from "../../../generated/graphql";
 import { HeyText } from "./HeyText";
-import { SectionButton } from "./SectionButton";
 import { Link } from "react-router-dom";
+import { MenuButton } from "./MenuButton";
 
 interface SidebarDashProps {}
 
 export const SidebarDash: React.FC<SidebarDashProps> = () => {
   const { data } = useMeQuery();
+  const [isActive, setIsActive] = useState<string>("Home");
+
+  const menu = ["Home", "Schedule", "Whiteboard", "Settings"];
+
   return (
-    <Box bg="darkBlue" w="100%" height="100%" p="0px 20px">
+    <Box bg="darkBlue" w="100%" height="100%">
       <HeyText username={data?.me?.username} />
-      <Box mt="50px">
-        <SectionButton endpoint="" name="Home" key="1" />
-        <SectionButton endpoint="schedule" name="Schedule" key="2" />
-        <SectionButton endpoint="whiteboard" name="Whiteboard" key="3" />
-        <SectionButton endpoint="settings" name="Settings" key="4" />
-      </Box>
-      <Link style={{ textDecoration: "none", color: "#DFDFDF" }} to="/timer">
-        <Text mt="10px">Open timer</Text>
-      </Link>
+      <Flex mt="50px" flexDirection="column" align="center">
+        {menu.map((name) => {
+          return (
+            <MenuButton
+              title={name}
+              setState={setIsActive}
+              state={isActive}
+              key={name}
+            />
+          );
+        })}
+
+        <Link
+          style={{
+            textDecoration: "none",
+            color: "#e4e4e4F",
+            marginTop: "50px",
+          }}
+          to="/timer"
+        >
+          <Button variantColor="green" cursor="pointer">
+            Open timer
+          </Button>
+        </Link>
+      </Flex>
     </Box>
   );
 };

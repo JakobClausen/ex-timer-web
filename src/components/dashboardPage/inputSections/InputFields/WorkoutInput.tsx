@@ -24,6 +24,7 @@ export const WorkoutInput: React.FC<WorkoutInputProps> = (props) => {
           Workout
         </FormLabel>
         <Textarea
+          boxShadow="2px 2px 10px 1px #888888"
           borderRadius="none"
           textAlign="center"
           fontFamily="body"

@@ -1,6 +1,6 @@
 import React from "react";
-import { Box, Button, Flex, Grid, Text } from "@chakra-ui/core";
-import { Route, Link } from "react-router-dom";
+import { Box, Flex, Grid, Text } from "@chakra-ui/core";
+import { Route } from "react-router-dom";
 import { AuthPage } from "../authPage/AuthPage";
 
 interface FirstPageProps {}

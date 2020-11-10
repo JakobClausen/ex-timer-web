@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import { DashboardPage } from "./components/dashboardPage/DashboardPage";
 import { TimerPage } from "./components/timerPage/TimerPage";
 import { Box } from "@chakra-ui/core";
