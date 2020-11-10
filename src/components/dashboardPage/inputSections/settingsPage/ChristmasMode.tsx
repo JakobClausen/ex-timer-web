@@ -1,12 +1,12 @@
 import { Flex, Switch, Text, Image } from "@chakra-ui/core";
 import React, { useContext } from "react";
-import { christmasContext } from "../../../context/christmasContext";
+import { globalContext } from "../../../context/globalContext";
 import christmasImg from "../../../../assets/hat.svg";
 
 interface ChristmasModeProps {}
 
 export const ChristmasMode: React.FC<ChristmasModeProps> = () => {
-  const { setChristmasMode, isChristmasMode } = useContext(christmasContext);
+  const { setChristmasMode, isChristmasMode } = useContext(globalContext);
 
   return (
     <Flex

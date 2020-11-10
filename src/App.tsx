@@ -1,30 +1,48 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Redirect, Route } from "react-router-dom";
 import { DashboardPage } from "./components/dashboardPage/DashboardPage";
 import { TimerPage } from "./components/timerPage/TimerPage";
 import { Box } from "@chakra-ui/core";
-import { christmasContext } from "./components/context/christmasContext";
+import { globalContext } from "./components/context/globalContext";
 import { FirstPage } from "./components/firstPage/FirstPage";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 import { ForgotPassword } from "./components/auth/forgotPassword/ForgotPassword";
+import { useIsLoggedInQuery } from "./generated/graphql";
 
 interface appProps {}
 
 const App: React.FC<appProps> = () => {
-  const [isChristmasMode, setChristmasMode] = useState(false);
+  const [isChristmasMode, setChristmasMode] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const { data, loading } = useIsLoggedInQuery();
+
+  useEffect(() => {
+    if (data) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+    }
+  }, [data]);
+
+  if (loading) {
+    return null;
+  }
+  console.log(isLoggedIn);
   return (
     <Box w="100%" h="100vh" bg="darkBlue">
       <Router>
-        <christmasContext.Provider
+        <globalContext.Provider
           value={{
             isChristmasMode,
             setChristmasMode,
+            isLoggedIn,
+            setIsLoggedIn,
           }}
         >
           <Route exact path="/">
             <FirstPage>
-              <Login />
+              {data?.isLoggedIn ? <Redirect to="/dashboard" /> : <Login />}
             </FirstPage>
           </Route>
           <Route exact path="/signup">
@@ -38,12 +56,12 @@ const App: React.FC<appProps> = () => {
             </FirstPage>
           </Route>
           <Route path="/dashboard">
-            <DashboardPage />
+            {data?.isLoggedIn ? <DashboardPage /> : <Redirect to="/" />}
           </Route>
           <Route path="/timer">
-            <TimerPage />
+            {data?.isLoggedIn ? <TimerPage /> : <Redirect to="/" />}
           </Route>
-        </christmasContext.Provider>
+        </globalContext.Provider>
       </Router>
     </Box>
   );

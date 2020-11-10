@@ -1,12 +1,10 @@
 import { Box, Button, Text } from "@chakra-ui/core";
 import React from "react";
-import { useHistory } from "react-router-dom";
-import { useLogoutMutation } from "../../../generated/graphql";
+import { useLogoutMutation } from "../../../../generated/graphql";
 
 interface LogoutProps {}
 
 export const Logout: React.FC<LogoutProps> = () => {
-  const history = useHistory();
   const [logMeOut] = useLogoutMutation();
   return (
     <Box pos="absolute" bottom="0px" m="20px">
@@ -14,7 +12,7 @@ export const Logout: React.FC<LogoutProps> = () => {
         cursor="pointer"
         onClick={() => {
           logMeOut();
-          history.push("/");
+          window.location.reload();
         }}
       >
         <Text fontSize="md" color="#C11235" fontWeight="bold">
