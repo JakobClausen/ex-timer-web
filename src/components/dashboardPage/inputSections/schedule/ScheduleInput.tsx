@@ -3,10 +3,6 @@ import TextField from "@material-ui/core/TextField";
 import { Box, Flex } from "@chakra-ui/core";
 import { Radio, RadioGroup } from "@chakra-ui/core";
 
-interface ScheduleInputProps {}
-
-interface ClassInterface {}
-
 export const ScheduleInput: React.FC<any> = ({ text }) => {
   return (
     <Box>

@@ -17,6 +17,7 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
 }) => {
   let inputs: any = [];
   const [inputAmount, setInputAmount] = useState(scheduleValue[display].amount);
+  const [classes, setClasses] = useState([]);
 
   if (display !== day) {
     return null;

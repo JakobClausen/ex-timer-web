@@ -22,8 +22,6 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
     "Sunday",
   ];
 
-  console.log(scheduleValue);
-
   return (
     <Box w="100%">
       <Text pl="20px" fontSize="5xl">
