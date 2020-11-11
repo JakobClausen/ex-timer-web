@@ -1,6 +1,6 @@
 import { Box, Text } from "@chakra-ui/core";
 import React from "react";
-import { Logout } from "../../sidebar/Logout";
+import { Logout } from "./Logout";
 import { ChristmasMode } from "./ChristmasMode";
 
 interface SettingsContainerProps {}

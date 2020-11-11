@@ -8,7 +8,7 @@ import { futureClasses } from "../../utils/futureClasses";
 import { useGetDayScheduleQuery } from "../../generated/graphql";
 import { isClassActive } from "../../utils/isClassActive";
 import Snowfall from "react-snowfall";
-import { christmasContext } from "../context/christmasContext";
+import { globalContext } from "../context/globalContext";
 import { Loading } from "../loading-error/Loading";
 
 interface TimerPageProps {}
@@ -19,7 +19,7 @@ export const TimerPage: React.FC<TimerPageProps> = () => {
   const [date, setDate] = useState("");
   const [classActive, setClassActive] = useState<boolean>(false);
   const [schedule, setSchedule] = useState<any>();
-  const { isChristmasMode } = useContext(christmasContext);
+  const { isChristmasMode } = useContext(globalContext);
 
   useEffect(() => {
     const interval = setInterval(() => {
