@@ -7,30 +7,37 @@ interface ClassInterface {
 export default {
   Monday: {
     day: "Monday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 2 }],
+    classes: [],
+    amount: 0,
   },
   Tuesday: {
     day: "Tuesday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 2 }],
+    classes: [],
+    amount: 0,
   },
   Wednesday: {
     day: "Wednesday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 1 }],
+    classes: [],
+    amount: 0,
   },
   Thursday: {
     day: "Thursday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 1 }],
+    classes: [],
+    amount: 0,
   },
   Friday: {
     day: "Friday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 1 }],
+    classes: [],
+    amount: 0,
   },
   Saturday: {
     day: "Saturday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 1 }],
+    classes: [],
+    amount: 0,
   },
   Sunday: {
     day: "Sunday",
-    classes: [{ start_time: "16:00", end_time: "17:00", category: 1 }],
+    classes: [],
+    amount: 0,
   },
 };

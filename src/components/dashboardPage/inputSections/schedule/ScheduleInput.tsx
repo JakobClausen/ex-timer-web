@@ -5,21 +5,9 @@ import { Radio, RadioGroup } from "@chakra-ui/core";
 
 interface ScheduleInputProps {}
 
-interface ClassInterface {
-  startTime: string;
-  endTime: string;
-  category: string;
-}
+interface ClassInterface {}
 
 export const ScheduleInput: React.FC<any> = ({ text }) => {
-  const [isClass, setIsClass] = useState<ClassInterface | null>({
-    startTime: "",
-    endTime: "",
-    category: "1",
-  });
-
-  useEffect(() => {}, [isClass]);
-
   return (
     <Box>
       <Flex flexDirection="column" w="30%" m="50px">
@@ -49,15 +37,7 @@ export const ScheduleInput: React.FC<any> = ({ text }) => {
           }}
         />
 
-        <RadioGroup
-          onChange={(e) =>
-            setIsClass({
-              startTime: "16:00",
-              endTime: "17:00",
-              category: e.target.value,
-            })
-          }
-        >
+        <RadioGroup>
           <Radio value="1">Crossfit</Radio>
           <Radio value="2">Gymnastics</Radio>
         </RadioGroup>

@@ -10,6 +10,7 @@ interface ScheduleContainerProps {}
 export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const [createSchedule] = useCreateScheduleMutation();
   const [displayDay, setDisplayDay] = useState<string>("Monday");
+  const [scheduleValue, setScheduleValue] = useState<any>(initialValues);
 
   const weekDays = [
     "Monday",
@@ -21,14 +22,7 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
     "Sunday",
   ];
 
-  const [classes, setClasses] = useState([
-    {
-      startTime: "",
-      endTime: "",
-      category: null,
-      id: 0,
-    },
-  ]);
+  console.log(scheduleValue);
 
   return (
     <Box w="100%">
@@ -39,23 +33,29 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
         <Box w="100%">
           {weekDays.map((day) => {
             return (
-              <>
-                <DayButton
-                  key={day}
-                  day={day}
-                  setState={setDisplayDay}
-                  state={displayDay}
-                />
-              </>
+              <DayButton
+                key={day}
+                day={day}
+                setState={setDisplayDay}
+                state={displayDay}
+              />
             );
           })}
           <Button type="submit" ml="20px" cursor="pointer">
             Submit changes
           </Button>
         </Box>
-        <Box w="100%">
-          <Button>Add class</Button>
-        </Box>
+        {weekDays.map((day) => {
+          return (
+            <ScheduleDay
+              key={day}
+              display={displayDay}
+              scheduleValue={scheduleValue}
+              setScheduleValue={setScheduleValue}
+              day={day}
+            />
+          );
+        })}
       </Grid>
     </Box>
   );
