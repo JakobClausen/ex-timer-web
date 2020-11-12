@@ -1,6 +1,7 @@
 import { Box, Button, Text } from "@chakra-ui/core";
-import React, { Dispatch, SetStateAction, useState } from "react";
+import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ScheduleInput } from "./ScheduleInput";
+import formatClasses from "../../../../utils/formatClasses";
 
 interface ScheduleDayProps {
   day: string;
@@ -21,6 +22,13 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
     [day]: {},
   });
 
+  useEffect(() => {
+    const newArray = formatClasses(classes, day);
+    const spread = scheduleValue[day];
+    spread.classes = newArray;
+    setScheduleValue({ ...scheduleValue, spread });
+  }, [classes]);
+
   if (display !== day) {
     return null;
   }
@@ -36,8 +44,6 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
       />
     );
   }
-
-  console.log(classes);
 
   return (
     <Box w="100%">

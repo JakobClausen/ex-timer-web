@@ -4,6 +4,7 @@ import { ScheduleDay } from "./ScheduleDay";
 import initialValues from "./initialValues";
 import { useCreateScheduleMutation } from "../../../../generated/graphql";
 import { DayButton } from "../whiteboard/DayButton";
+import { removeKeys } from "../../../../utils/formatClasses";
 
 interface ScheduleContainerProps {}
 
@@ -22,6 +23,17 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
     "Sunday",
   ];
 
+  const handleSubmit = async () => {
+    const schedule = removeKeys(scheduleValue);
+    const response = await createSchedule({
+      variables: {
+        data: { ...schedule },
+      },
+    });
+    console.log(response);
+    // const test = removeKeys(scheduleValue);
+  };
+
   return (
     <Box w="100%">
       <Text pl="20px" fontSize="5xl">
@@ -39,7 +51,12 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
               />
             );
           })}
-          <Button type="submit" ml="20px" cursor="pointer">
+          <Button
+            type="submit"
+            ml="20px"
+            cursor="pointer"
+            onClick={handleSubmit}
+          >
             Submit changes
           </Button>
         </Box>
