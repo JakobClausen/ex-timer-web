@@ -7,8 +7,9 @@ import { globalContext } from "./components/context/globalContext";
 import { FirstPage } from "./components/firstPage/FirstPage";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
-import { ForgotPassword } from "./components/auth/forgotPassword/ForgotPassword";
+import { ForgotPassword } from "./components/auth/ForgotPassword";
 import { useIsLoggedInQuery } from "./generated/graphql";
+import { ChangePassword } from "./components/auth/changePassword";
 
 interface appProps {}
 
@@ -52,6 +53,11 @@ const App: React.FC<appProps> = () => {
           <Route exact path="/forgot-password">
             <FirstPage>
               <ForgotPassword />
+            </FirstPage>
+          </Route>
+          <Route path="/reset-password/:token">
+            <FirstPage>
+              <ChangePassword />
             </FirstPage>
           </Route>
           <Route path="/dashboard">

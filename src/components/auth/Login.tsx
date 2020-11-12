@@ -14,7 +14,7 @@ const Login: React.FC<loginProps> = () => {
   const history = useHistory();
 
   return (
-    <Box m="40px" h="100%">
+    <Box m="40px" fontFamily="body">
       <Formik
         initialValues={{ email: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {
