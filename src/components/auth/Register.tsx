@@ -17,7 +17,7 @@ const Register: React.FC<RegisterProps> = () => {
   const history = useHistory();
 
   return (
-    <Box m="40px" h="100%">
+    <Box m="40px" fontFamily="body">
       <Formik
         initialValues={{ email: "", username: "", password: "" }}
         onSubmit={async (values, { setErrors }) => {

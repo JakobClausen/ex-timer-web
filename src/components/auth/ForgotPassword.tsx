@@ -1,9 +1,9 @@
 import { Box, Button } from "@chakra-ui/core";
 import { Formik, Form } from "formik";
 import React, { useState } from "react";
-import { InputField } from "../InputField";
+import { InputField } from "./InputField";
 import { Link } from "react-router-dom";
-import { useForgotPasswordMutation } from "../../../generated/graphql";
+import { useForgotPasswordMutation } from "../../generated/graphql";
 
 interface ForgotPasswordProps {}
 
@@ -11,7 +11,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = () => {
   const [sendEmail] = useForgotPasswordMutation();
   const [isComplete, setIsComplete] = useState(false);
   return (
-    <Box m="40px" h="100%">
+    <Box m="40px" fontFamily="body">
       <Formik
         initialValues={{ email: "" }}
         onSubmit={async ({ email }) => {

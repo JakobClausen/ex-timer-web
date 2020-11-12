@@ -11,9 +11,9 @@ interface WhiteboardProps {}
 
 export const Whiteboard: React.FC<WhiteboardProps> = () => {
   const { today } = useContext(TimeContext);
-  const [isEmpty, setIsEmpty] = useState<boolean>(false);
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
   const { data, loading } = useGetWhiteboardQuery({
-    variables: { day: "Wednesday" },
+    variables: { day: today },
   });
 
   useEffect(() => {
@@ -26,10 +26,10 @@ export const Whiteboard: React.FC<WhiteboardProps> = () => {
 
   return (
     <Box h="100%" bg="white" borderRadius="10px" position="relative">
-      {!isEmpty ? (
-        <DbWhiteboard data={data?.getWhiteboard.workout} />
-      ) : (
+      {isEmpty ? (
         <APIWhiteboard />
+      ) : (
+        <DbWhiteboard data={data?.getWhiteboard.workout} />
       )}
     </Box>
   );

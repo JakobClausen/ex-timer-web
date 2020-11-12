@@ -10,6 +10,7 @@ export default {
   },
   fonts: {
     ...defaultTheme.fonts,
+    logo: "Permanent Marker, cursive",
     heading: "Roboto, sans-serif",
     body: "Roboto, sans-serif",
   },
