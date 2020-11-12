@@ -43,7 +43,7 @@ export const TimerPage: React.FC<TimerPageProps> = () => {
       const schedule = futureClasses(data?.getDaySchedule[0].gymClass, clock);
 
       setSchedule(schedule);
-      if (!schedule) {
+      if (schedule.length !== 0) {
         setClassActive(
           isClassActive(
             clock,
@@ -54,6 +54,8 @@ export const TimerPage: React.FC<TimerPageProps> = () => {
             classActive
           )
         );
+      } else {
+        setClassActive(false);
       }
     }
     // eslint-disable-next-line

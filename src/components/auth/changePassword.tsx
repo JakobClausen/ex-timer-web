@@ -17,7 +17,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = () => {
   const history = useHistory();
 
   return (
-    <Box m="40px" h="100%">
+    <Box m="40px" fontFamily="body">
       <Formik
         initialValues={{ newPassword: "" }}
         onSubmit={async (values, { setErrors }) => {
@@ -39,7 +39,7 @@ export const ChangePassword: React.FC<ChangePasswordProps> = () => {
               label="New Password"
               type="password"
             />
-            <Button type="submit" isLoading={isSubmitting}>
+            <Button mt="10px" type="submit" isLoading={isSubmitting}>
               Change Password
             </Button>
           </Form>
