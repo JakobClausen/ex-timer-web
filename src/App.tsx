@@ -28,7 +28,6 @@ const App: React.FC<appProps> = () => {
   if (loading) {
     return null;
   }
-  console.log(isLoggedIn);
   return (
     <Box w="100%" h="100vh" bg="darkBlue">
       <Router>

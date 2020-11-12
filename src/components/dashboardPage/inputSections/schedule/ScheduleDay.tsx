@@ -17,15 +17,27 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
 }) => {
   let inputs: any = [];
   const [inputAmount, setInputAmount] = useState(scheduleValue[display].amount);
-  const [classes, setClasses] = useState([]);
+  const [classes, setClasses] = useState({
+    [day]: {},
+  });
 
   if (display !== day) {
     return null;
   }
 
   for (let i = 0; i < inputAmount; i++) {
-    inputs.push(<ScheduleInput key={i} />);
+    inputs.push(
+      <ScheduleInput
+        setClasses={setClasses}
+        classes={classes[day]}
+        key={i}
+        id={i}
+        day={day}
+      />
+    );
   }
+
+  console.log(classes);
 
   return (
     <Box w="100%">
@@ -38,6 +50,7 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
           spread[display].amount = inputAmount + 1;
           setScheduleValue(spread);
         }}
+        cursor="pointer"
       >
         Add class
       </Button>
