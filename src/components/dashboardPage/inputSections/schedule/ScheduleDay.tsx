@@ -29,10 +29,6 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
     setScheduleValue({ ...scheduleValue, spread });
   }, [classes]);
 
-  if (display !== day) {
-    return null;
-  }
-
   for (let i = 0; i < inputAmount; i++) {
     inputs.push(
       <ScheduleInput
@@ -41,13 +37,20 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
         key={i}
         id={i}
         day={day}
+        allInputs={inputs}
       />
     );
   }
 
+  if (display !== day) {
+    return null;
+  }
+
+  console.log(inputs);
+
   return (
     <Box w="100%">
-      <Text>{display}</Text>
+      <Text fontSize="3xl">{display}</Text>
       {inputs.map((input: any, i: number) => input)}
       <Button
         onClick={() => {

@@ -14,19 +14,27 @@ export const ScheduleInput: React.FC<any> = ({
   setClasses,
   id,
   day,
+  allInputs,
 }) => {
   const [classValues, setClassValues] = useState({
-    start_time: "07:30",
-    end_time: "08:30",
+    start_time: "",
+    end_time: "",
     category: 1,
   });
 
   useEffect(() => {
-    // setClasses({ ...classes, [id]: classValues });
     setClasses({ [day]: { ...classes, [id]: classValues } });
   }, [classValues]);
 
-  // console.log(id);
+  const handleRemove = () => {
+    const spread = { ...classes };
+    delete spread[id];
+    setClasses({ [day]: { ...spread } });
+    const index = allInputs.indexOf(allInputs[id]);
+    if (index > -1) {
+      allInputs.splice(index, 1);
+    }
+  };
 
   return (
     <Box>
@@ -80,7 +88,7 @@ export const ScheduleInput: React.FC<any> = ({
           <Radio value="1">Crossfit</Radio>
           <Radio value="2">Gymnastics</Radio>
         </RadioGroup>
-        <Text cursor="pointer" color="red.600" mt="0">
+        <Text cursor="pointer" color="red.600" mt="0" onClick={handleRemove}>
           Remove
         </Text>
       </Flex>
