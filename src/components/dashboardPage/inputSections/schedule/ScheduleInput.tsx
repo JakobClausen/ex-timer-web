@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
-import { Box, Flex } from "@chakra-ui/core";
+import { Box, Flex, Text } from "@chakra-ui/core";
 import { Radio, RadioGroup } from "@chakra-ui/core";
 
 interface ScheduleInputProps {
@@ -30,7 +30,7 @@ export const ScheduleInput: React.FC<any> = ({
 
   return (
     <Box>
-      <Flex flexDirection="column" w="30%" m="50px">
+      <Flex flexDirection="column" w="40%" m="50px 0">
         <TextField
           id="start"
           label="Start time"
@@ -74,10 +74,15 @@ export const ScheduleInput: React.FC<any> = ({
             spread.category = parseInt(e.target.value);
             setClassValues(spread);
           }}
+          isInline
         >
+          <Text>Category:</Text>
           <Radio value="1">Crossfit</Radio>
           <Radio value="2">Gymnastics</Radio>
         </RadioGroup>
+        <Text cursor="pointer" color="red.600" mt="0">
+          Remove
+        </Text>
       </Flex>
     </Box>
   );

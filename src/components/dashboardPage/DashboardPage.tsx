@@ -7,7 +7,7 @@ interface DashboardPageProps {}
 
 export const DashboardPage: React.FC<DashboardPageProps> = () => {
   return (
-    <Grid templateColumns="15% 85%" w="100%" h="100vh">
+    <Grid templateColumns="15% 85%" w="100%" minH="100vh">
       <Box w="100%" h="100%">
         <SidebarDash />
       </Box>

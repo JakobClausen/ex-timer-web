@@ -14,7 +14,7 @@ export const SidebarDash: React.FC<SidebarDashProps> = () => {
   const menu = ["Home", "Schedule", "Whiteboard", "Settings"];
 
   return (
-    <Box bg="darkBlue" w="100%" height="100%">
+    <Box bg="darkBlue" w="15vw" height="100%" position="fixed">
       <HeyText username={data?.me?.username} />
       <Flex mt="50px" flexDirection="column" align="center">
         {menu.map((name) => {

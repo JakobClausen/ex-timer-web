@@ -57,6 +57,7 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
           setScheduleValue(spread);
         }}
         cursor="pointer"
+        mb="50px"
       >
         Add class
       </Button>
