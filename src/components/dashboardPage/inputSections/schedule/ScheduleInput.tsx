@@ -14,7 +14,8 @@ export const ScheduleInput: React.FC<any> = ({
   setClasses,
   id,
   day,
-  allInputs,
+  inputs,
+  setInputs,
 }) => {
   const [classValues, setClassValues] = useState({
     start_time: "",
@@ -30,9 +31,12 @@ export const ScheduleInput: React.FC<any> = ({
     const spread = { ...classes };
     delete spread[id];
     setClasses({ [day]: { ...spread } });
-    const index = allInputs.indexOf(allInputs[id]);
+
+    const index = inputs.indexOf(inputs[id]);
+
     if (index > -1) {
-      allInputs.splice(index, 1);
+      inputs.splice(index, 1);
+      setInputs(inputs);
     }
   };
 
