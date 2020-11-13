@@ -22,5 +22,5 @@ export const countDownTimer = (end: string) => {
   //   scheduleMinutes < 10 ? "0" + scheduleMinutes : scheduleMinutes
   // }`
 
-  return `${scheduleMinutes} min`;
+  return `${scheduleMinutes - 1} min`;
 };

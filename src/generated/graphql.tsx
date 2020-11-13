@@ -13,7 +13,7 @@ export type Scalars = {
 
 export type Query = {
   __typename?: 'Query';
-  isLoggedIn: Scalars['String'];
+  isLoggedIn: Scalars['Boolean'];
   me?: Maybe<User>;
   getUser: User;
   getWhiteboard: Whiteboard;
@@ -395,6 +395,14 @@ export type GetDayScheduleQuery = (
   )> }
 );
 
+export type GetWodapiQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetWodapiQuery = (
+  { __typename?: 'Query' }
+  & Pick<Query, 'getRandomWorkout'>
+);
+
 export type IsLoggedInQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -758,6 +766,36 @@ export function useGetDayScheduleLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type GetDayScheduleQueryHookResult = ReturnType<typeof useGetDayScheduleQuery>;
 export type GetDayScheduleLazyQueryHookResult = ReturnType<typeof useGetDayScheduleLazyQuery>;
 export type GetDayScheduleQueryResult = Apollo.QueryResult<GetDayScheduleQuery, GetDayScheduleQueryVariables>;
+export const GetWodapiDocument = gql`
+    query GetWODAPI {
+  getRandomWorkout
+}
+    `;
+
+/**
+ * __useGetWodapiQuery__
+ *
+ * To run a query within a React component, call `useGetWodapiQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetWodapiQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetWodapiQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetWodapiQuery(baseOptions?: Apollo.QueryHookOptions<GetWodapiQuery, GetWodapiQueryVariables>) {
+        return Apollo.useQuery<GetWodapiQuery, GetWodapiQueryVariables>(GetWodapiDocument, baseOptions);
+      }
+export function useGetWodapiLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetWodapiQuery, GetWodapiQueryVariables>) {
+          return Apollo.useLazyQuery<GetWodapiQuery, GetWodapiQueryVariables>(GetWodapiDocument, baseOptions);
+        }
+export type GetWodapiQueryHookResult = ReturnType<typeof useGetWodapiQuery>;
+export type GetWodapiLazyQueryHookResult = ReturnType<typeof useGetWodapiLazyQuery>;
+export type GetWodapiQueryResult = Apollo.QueryResult<GetWodapiQuery, GetWodapiQueryVariables>;
 export const IsLoggedInDocument = gql`
     query IsLoggedIn {
   isLoggedIn
