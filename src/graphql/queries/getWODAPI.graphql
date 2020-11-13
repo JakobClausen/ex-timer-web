@@ -1,0 +1,3 @@
+query GetWODAPI {
+  getRandomWorkout
+}

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Grid, Text, useToast } from "@chakra-ui/core";
+import { Box, Button, Flex, Grid, Text, useToast } from "@chakra-ui/core";
 import { Form, Formik } from "formik";
 import { DayForm } from "./DayForm";
 import { getInitialValues } from "../../../../utils/initialValues";
@@ -10,6 +10,7 @@ import {
 import { DayButton } from "./DayButton";
 import { Loading } from "../../../loading-error/Loading";
 import { Error } from "../../../loading-error/Error";
+import { InfoPopover } from "./InfoPopover";
 
 interface WhiteboardContainerProps {}
 
@@ -52,9 +53,10 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
   const initialValues = getInitialValues(data.getAllWhiteboards);
   return (
     <Box w="100%">
-      <Text pl="20px" fontSize="5xl">
-        Whiteboard
-      </Text>
+      <Flex justify="space-between" p="0px 20px">
+        <Text fontSize="5xl">Whiteboard</Text>
+        <InfoPopover />
+      </Flex>
       <Formik
         initialValues={{
           ...initialValues,

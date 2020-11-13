@@ -7,6 +7,7 @@ export default {
     darkBlue: "#2a363b",
     readyGreen: "#549D58",
     darkGray: "#222629",
+    buttonGreen: "#00a5a5",
   },
   fonts: {
     ...defaultTheme.fonts,
