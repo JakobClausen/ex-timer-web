@@ -30,8 +30,6 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
         data: { ...schedule },
       },
     });
-    console.log(response);
-    // const test = removeKeys(scheduleValue);
   };
 
   return (
@@ -56,6 +54,7 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
             ml="20px"
             cursor="pointer"
             onClick={handleSubmit}
+            bg="#1e8dd6"
           >
             Submit changes
           </Button>

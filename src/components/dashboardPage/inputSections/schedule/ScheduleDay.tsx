@@ -16,7 +16,7 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
   scheduleValue,
   setScheduleValue,
 }) => {
-  let inputs: any = [];
+  const [inputs, setInputs] = useState<any>([]);
   const [inputAmount, setInputAmount] = useState(scheduleValue[display].amount);
   const [classes, setClasses] = useState({
     [day]: {},
@@ -29,25 +29,35 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
     setScheduleValue({ ...scheduleValue, spread });
   }, [classes]);
 
+  useEffect(() => {
+    let array = [];
+
+    for (let i = 0; i < inputAmount; i++) {
+      array.push(
+        <ScheduleInput
+          setClasses={setClasses}
+          classes={classes[day]}
+          key={i}
+          id={i}
+          day={day}
+          inputs={inputs}
+          setInputs={setInputs}
+        />
+      );
+    }
+
+    setInputs(array);
+  }, [inputAmount]);
+
   if (display !== day) {
     return null;
   }
 
-  for (let i = 0; i < inputAmount; i++) {
-    inputs.push(
-      <ScheduleInput
-        setClasses={setClasses}
-        classes={classes[day]}
-        key={i}
-        id={i}
-        day={day}
-      />
-    );
-  }
+  console.log(inputs);
 
   return (
     <Box w="100%">
-      <Text>{display}</Text>
+      <Text fontSize="3xl">{display}</Text>
       {inputs.map((input: any, i: number) => input)}
       <Button
         onClick={() => {
