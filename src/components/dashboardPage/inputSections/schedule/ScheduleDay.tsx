@@ -16,8 +16,8 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
   scheduleValue,
   setScheduleValue,
 }) => {
-  const [inputs, setInputs] = useState<any>([]);
   const [inputAmount, setInputAmount] = useState(scheduleValue[display].amount);
+  const [test, setTest] = useState<number[]>([]);
   const [classes, setClasses] = useState({
     [day]: {},
   });
@@ -29,39 +29,31 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
     setScheduleValue({ ...scheduleValue, spread });
   }, [classes]);
 
-  useEffect(() => {
-    let array = [];
-
-    for (let i = 0; i < inputAmount; i++) {
-      array.push(
-        <ScheduleInput
-          setClasses={setClasses}
-          classes={classes[day]}
-          key={i}
-          id={i}
-          day={day}
-          inputs={inputs}
-          setInputs={setInputs}
-        />
-      );
-    }
-
-    setInputs(array);
-  }, [inputAmount]);
-
   if (display !== day) {
     return null;
   }
 
-  console.log(inputs);
-
   return (
     <Box w="100%">
       <Text fontSize="3xl">{display}</Text>
-      {inputs.map((input: any, i: number) => input)}
+      {test.map((oneClass) => {
+        return (
+          <ScheduleInput
+            setClasses={setClasses}
+            classes={classes[day]}
+            key={oneClass}
+            id={oneClass}
+            day={day}
+            setTest={setTest}
+            test={test}
+          />
+        );
+      })}
+
       <Button
         onClick={() => {
           setInputAmount(inputAmount + 1);
+          setTest([...test, inputAmount]);
           const spread = { ...scheduleValue };
           spread[display].amount = inputAmount + 1;
           setScheduleValue(spread);

@@ -13,6 +13,8 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const [displayDay, setDisplayDay] = useState<string>("Monday");
   const [scheduleValue, setScheduleValue] = useState<any>(initialValues);
 
+  console.log(scheduleValue);
+
   const weekDays = [
     "Monday",
     "Tuesday",
