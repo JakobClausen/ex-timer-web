@@ -1,19 +1,27 @@
 import { Box, Button, Grid, Text } from "@chakra-ui/core";
 import React, { useState } from "react";
 import { ScheduleDay } from "./ScheduleDay";
-import initialValues from "./initialValues";
-import { useCreateScheduleMutation } from "../../../../generated/graphql";
+import {
+  useCreateScheduleMutation,
+  useGetAllScheduleQuery,
+} from "../../../../generated/graphql";
 import { DayButton } from "../whiteboard/DayButton";
 import { removeKeys } from "../../../../utils/formatClasses";
+import { Loading } from "../../../loading-error/Loading";
+import {
+  getInitValSchedule,
+  initialValueInterface,
+} from "../../../../utils/getInitValSchedule";
 
 interface ScheduleContainerProps {}
 
 export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
+  const { data, loading } = useGetAllScheduleQuery();
   const [createSchedule] = useCreateScheduleMutation();
   const [displayDay, setDisplayDay] = useState<string>("Monday");
-  const [scheduleValue, setScheduleValue] = useState<any>(initialValues);
-
-  console.log(scheduleValue);
+  const [scheduleValue, setScheduleValue] = useState<any>(
+    getInitValSchedule(data)
+  );
 
   const weekDays = [
     "Monday",
@@ -27,11 +35,13 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
 
   const handleSubmit = async () => {
     const schedule = removeKeys(scheduleValue);
-    const response = await createSchedule({
-      variables: {
-        data: { ...schedule },
-      },
-    });
+    console.log(schedule);
+
+    // await createSchedule({
+    //   variables: {
+    //     data: { ...schedule },
+    //   },
+    // });
   };
 
   return (
@@ -61,17 +71,21 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
             Submit changes
           </Button>
         </Box>
-        {weekDays.map((day) => {
-          return (
-            <ScheduleDay
-              key={day}
-              display={displayDay}
-              scheduleValue={scheduleValue}
-              setScheduleValue={setScheduleValue}
-              day={day}
-            />
-          );
-        })}
+        {loading ? (
+          <Loading />
+        ) : (
+          weekDays.map((day) => {
+            return (
+              <ScheduleDay
+                key={day}
+                display={displayDay}
+                scheduleValue={scheduleValue}
+                setScheduleValue={setScheduleValue}
+                day={day}
+              />
+            );
+          })
+        )}
       </Grid>
     </Box>
   );

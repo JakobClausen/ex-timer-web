@@ -14,28 +14,27 @@ export const ScheduleInput: React.FC<any> = ({
   setClasses,
   id,
   day,
-  test,
-  setTest,
+  startVal,
+  setStartVal,
+  initialValues,
 }) => {
-  const [classValues, setClassValues] = useState({
-    start_time: "",
-    end_time: "",
-    category: 1,
-  });
+  const [classValues, setClassValues] = useState({ ...initialValues });
 
   useEffect(() => {
-    setClasses({ [day]: { ...classes, [id]: classValues } });
+    const addNewClass = { ...classes, [id]: classValues };
+    setClasses(addNewClass);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classValues]);
 
   const handleRemove = () => {
     const spread = { ...classes };
     delete spread[id];
-    setClasses({ [day]: { ...spread } });
+    setClasses({ ...spread });
 
-    const index = test.indexOf(id);
+    const index = startVal.indexOf(id);
     if (index > -1) {
-      test.splice(index, 1);
-      setTest(test);
+      startVal.splice(index, 1);
+      setStartVal(startVal);
     }
   };
 

@@ -3,21 +3,29 @@ const formatClasses = (classes: any, day: string) => {
 
   Object.keys(classes[day]).map((item) => {
     newArray.push(classes[day][item]);
+    return null;
   });
 
   return newArray;
 };
 
 export const removeKeys = (schedule: any) => {
-  let newObject: any = {};
-  delete schedule.spread;
-
   Object.keys(schedule).map((item) => {
-    delete schedule[item].amount;
-    newObject = { ...newObject, schedule };
+    if (Array.isArray(schedule[item].gymClass)) {
+      delete schedule[item].gymClass;
+    }
+    return null;
   });
 
-  return newObject.schedule;
+  return schedule;
+};
+
+export const createscheduleClass = (schedule: any) => {
+  let scheduleObj = {};
+  for (let i = 0; i < schedule.gymClass.length; i++) {
+    scheduleObj = { ...scheduleObj, [i]: schedule.gymClass[i] };
+  }
+  return scheduleObj;
 };
 
 export default formatClasses;

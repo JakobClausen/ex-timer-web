@@ -19,6 +19,7 @@ export type Query = {
   getWhiteboard: Whiteboard;
   getAllWhiteboards: Array<Whiteboard>;
   getDaySchedule: Array<ScheduleResponse>;
+  getAllSchedule: Array<ScheduleResponse>;
   getRandomWorkout: Scalars['String'];
 };
 
@@ -363,6 +364,21 @@ export type RegisterMutation = (
   ) }
 );
 
+export type GetAllScheduleQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetAllScheduleQuery = (
+  { __typename?: 'Query' }
+  & { getAllSchedule: Array<(
+    { __typename?: 'ScheduleResponse' }
+    & Pick<ScheduleResponse, 'day'>
+    & { gymClass: Array<(
+      { __typename?: 'ClassResponse' }
+      & Pick<ClassResponse, 'start_time' | 'end_time' | 'category_id'>
+    )> }
+  )> }
+);
+
 export type GetAllWhiteboardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -689,6 +705,43 @@ export function useRegisterMutation(baseOptions?: Apollo.MutationHookOptions<Reg
 export type RegisterMutationHookResult = ReturnType<typeof useRegisterMutation>;
 export type RegisterMutationResult = Apollo.MutationResult<RegisterMutation>;
 export type RegisterMutationOptions = Apollo.BaseMutationOptions<RegisterMutation, RegisterMutationVariables>;
+export const GetAllScheduleDocument = gql`
+    query GetAllSchedule {
+  getAllSchedule {
+    day
+    gymClass {
+      start_time
+      end_time
+      category_id
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetAllScheduleQuery__
+ *
+ * To run a query within a React component, call `useGetAllScheduleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetAllScheduleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetAllScheduleQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useGetAllScheduleQuery(baseOptions?: Apollo.QueryHookOptions<GetAllScheduleQuery, GetAllScheduleQueryVariables>) {
+        return Apollo.useQuery<GetAllScheduleQuery, GetAllScheduleQueryVariables>(GetAllScheduleDocument, baseOptions);
+      }
+export function useGetAllScheduleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetAllScheduleQuery, GetAllScheduleQueryVariables>) {
+          return Apollo.useLazyQuery<GetAllScheduleQuery, GetAllScheduleQueryVariables>(GetAllScheduleDocument, baseOptions);
+        }
+export type GetAllScheduleQueryHookResult = ReturnType<typeof useGetAllScheduleQuery>;
+export type GetAllScheduleLazyQueryHookResult = ReturnType<typeof useGetAllScheduleLazyQuery>;
+export type GetAllScheduleQueryResult = Apollo.QueryResult<GetAllScheduleQuery, GetAllScheduleQueryVariables>;
 export const GetAllWhiteboardsDocument = gql`
     query GetAllWhiteboards {
   getAllWhiteboards {
