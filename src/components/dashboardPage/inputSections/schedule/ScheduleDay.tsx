@@ -1,7 +1,7 @@
 import { Box, Button, Text } from "@chakra-ui/core";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ScheduleInput } from "./ScheduleInput";
-import formatClasses from "../../../../utils/formatClasses";
+import { turntoInt } from "../../../../utils/turnstartingValuesToInt";
 
 interface ScheduleDayProps {
   day: string;
@@ -16,55 +16,49 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
   scheduleValue,
   setScheduleValue,
 }) => {
-  const [inputs, setInputs] = useState<any>([]);
-  const [inputAmount, setInputAmount] = useState(scheduleValue[display].amount);
-  const [classes, setClasses] = useState({
-    [day]: {},
-  });
+  const [startVal, setStartVal] = useState<number[]>(
+    turntoInt(Object.keys(scheduleValue[day].gymClass))
+  );
+  const [classes, setClasses] = useState<any>(scheduleValue[day].gymClass);
 
   useEffect(() => {
-    const newArray = formatClasses(classes, day);
-    const spread = scheduleValue[day];
-    spread.classes = newArray;
-    setScheduleValue({ ...scheduleValue, spread });
+    setScheduleValue({
+      ...scheduleValue,
+      [day]: { ...scheduleValue[day], gymClass: classes },
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classes]);
-
-  useEffect(() => {
-    let array = [];
-
-    for (let i = 0; i < inputAmount; i++) {
-      array.push(
-        <ScheduleInput
-          setClasses={setClasses}
-          classes={classes[day]}
-          key={i}
-          id={i}
-          day={day}
-          inputs={inputs}
-          setInputs={setInputs}
-        />
-      );
-    }
-
-    setInputs(array);
-  }, [inputAmount]);
 
   if (display !== day) {
     return null;
   }
-
-  console.log(inputs);
-
   return (
     <Box w="100%">
       <Text fontSize="3xl">{display}</Text>
-      {inputs.map((input: any, i: number) => input)}
+      {startVal.map((i) => {
+        return (
+          <ScheduleInput
+            setClasses={setClasses}
+            classes={classes}
+            key={i}
+            id={i}
+            day={day}
+            setStartVal={setStartVal}
+            startVal={startVal}
+            initialValues={
+              classes[i]
+                ? classes[i]
+                : { start_time: "00:00", end_time: "00:00", category: 1 }
+            }
+          />
+        );
+      })}
+
       <Button
         onClick={() => {
-          setInputAmount(inputAmount + 1);
-          const spread = { ...scheduleValue };
-          spread[display].amount = inputAmount + 1;
-          setScheduleValue(spread);
+          setStartVal([...startVal, startVal.length]);
+          // const spread = { ...scheduleValue };
+          // setScheduleValue(spread);
         }}
         cursor="pointer"
         mb="50px"

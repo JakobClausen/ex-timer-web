@@ -14,35 +14,41 @@ export const ScheduleInput: React.FC<any> = ({
   setClasses,
   id,
   day,
-  inputs,
-  setInputs,
+  startVal,
+  setStartVal,
+  initialValues,
 }) => {
-  const [classValues, setClassValues] = useState({
-    start_time: "",
-    end_time: "",
-    category: 1,
-  });
+  const [classValues, setClassValues] = useState({ ...initialValues });
 
   useEffect(() => {
-    setClasses({ [day]: { ...classes, [id]: classValues } });
+    const addNewClass = { ...classes, [id]: classValues };
+    setClasses(addNewClass);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classValues]);
 
   const handleRemove = () => {
     const spread = { ...classes };
     delete spread[id];
-    setClasses({ [day]: { ...spread } });
+    setClasses({ ...spread });
 
-    const index = inputs.indexOf(inputs[id]);
-
+    const index = startVal.indexOf(id);
     if (index > -1) {
-      inputs.splice(index, 1);
-      setInputs(inputs);
+      startVal.splice(index, 1);
+      setStartVal(startVal);
     }
   };
 
   return (
     <Box>
-      <Flex flexDirection="column" w="40%" m="50px 0">
+      <Flex
+        flexDirection="column"
+        w="40%"
+        m="50px 0"
+        fontFamily="body"
+        bg="#e7e7e7"
+        borderRadius="10px"
+        p="10px"
+      >
         <TextField
           id="start"
           label="Start time"
@@ -80,7 +86,7 @@ export const ScheduleInput: React.FC<any> = ({
         />
 
         <RadioGroup
-          defaultValue="1"
+          defaultValue={classValues.category.toString()}
           onChange={(e) => {
             const spread = { ...classValues };
             spread.category = parseInt(e.target.value);
@@ -92,7 +98,7 @@ export const ScheduleInput: React.FC<any> = ({
           <Radio value="1">Crossfit</Radio>
           <Radio value="2">Gymnastics</Radio>
         </RadioGroup>
-        <Text cursor="pointer" color="red.600" mt="0" onClick={handleRemove}>
+        <Text cursor="pointer" color="red.600" mb="0" onClick={handleRemove}>
           Remove
         </Text>
       </Flex>

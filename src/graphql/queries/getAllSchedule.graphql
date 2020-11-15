@@ -1,0 +1,10 @@
+query GetAllSchedule {
+  getAllSchedule {
+    day
+    gymClass {
+      start_time
+      end_time
+      category_id
+    }
+  }
+}
