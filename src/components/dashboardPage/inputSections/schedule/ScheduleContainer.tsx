@@ -31,12 +31,12 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const handleSubmit = async () => {
     const schedule = removeKeys(scheduleValue);
     console.log(schedule);
-    const response = await createSchedule({
-      variables: {
-        data: { ...schedule },
-      },
-    });
-    console.log(response);
+    // const response = await createSchedule({
+    //   variables: {
+    //     data: { ...schedule },
+    //   },
+    // });
+    // console.log(response);
   };
 
   return (

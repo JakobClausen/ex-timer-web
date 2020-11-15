@@ -1,8 +1,4 @@
-import {
-  ClassResponse,
-  GetAllScheduleQuery,
-  ScheduleResponse,
-} from "../generated/graphql";
+import { GetAllScheduleQuery, ScheduleResponse } from "../generated/graphql";
 
 export interface initialValueInterface {
   Monday: ScheduleResponse;
@@ -63,8 +59,13 @@ export const getInitValSchedule = (data: GetAllScheduleQuery | undefined) => {
   if (data) {
     type key = keyof typeof initialValue;
     (Object.keys(initialValue) as Array<key>).map((day: key, i): any => {
-      const newGymClass = gymClassObj(data.getAllSchedule[i].gymClass);
-      initialValue[day].gymClass = newGymClass;
+      data.getAllSchedule.map((gymClass) => {
+        if (initialValue[day].day === gymClass.day) {
+          const newGymClass = gymClassObj(gymClass.gymClass);
+          initialValue[day].gymClass = newGymClass;
+        }
+        return null;
+      });
       return null;
     });
   }
