@@ -1,7 +1,6 @@
 import { Box, Button, Text } from "@chakra-ui/core";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ScheduleInput } from "./ScheduleInput";
-import { createscheduleClass } from "../../../../utils/formatClasses";
 import { turntoInt } from "../../../../utils/turnstartingValuesToInt";
 
 interface ScheduleDayProps {
@@ -21,7 +20,6 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
     turntoInt(Object.keys(scheduleValue[day].gymClass))
   );
   const [classes, setClasses] = useState<any>(scheduleValue[day].gymClass);
-  // createscheduleClass(scheduleValue[day])
 
   useEffect(() => {
     setScheduleValue({

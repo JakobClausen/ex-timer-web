@@ -1,4 +1,4 @@
-import { Box, Button, Grid, Text } from "@chakra-ui/core";
+import { Box, Button, Grid, Text, useToast } from "@chakra-ui/core";
 import React, { useState } from "react";
 import { ScheduleDay } from "./ScheduleDay";
 import {
@@ -13,6 +13,7 @@ import { getInitValSchedule } from "../../../../utils/getInitValSchedule";
 interface ScheduleContainerProps {}
 
 export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
+  const toast = useToast();
   const { data, loading } = useGetAllScheduleQuery();
   const [createSchedule] = useCreateScheduleMutation();
   const [displayDay, setDisplayDay] = useState<string>("Monday");
@@ -30,13 +31,31 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
 
   const handleSubmit = async () => {
     const schedule = removeKeys(scheduleValue);
-    console.log(schedule);
-    // const response = await createSchedule({
-    //   variables: {
-    //     data: { ...schedule },
-    //   },
-    // });
-    // console.log(response);
+    const response = await createSchedule({
+      variables: {
+        data: { ...schedule },
+      },
+    });
+    if (response.data) {
+      toast({
+        position: "top",
+        title: "Schedule sent",
+        description: "Your schedule was created",
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
+    if (response.errors) {
+      toast({
+        position: "top",
+        title: "Something went wrong",
+        description: "Try again!",
+        status: "error",
+        duration: 9000,
+        isClosable: true,
+      });
+    }
   };
 
   return (

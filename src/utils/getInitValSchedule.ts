@@ -52,6 +52,7 @@ const gymClassObj = (gymClass: any) => {
         category: x.category_id,
       },
     };
+    return null;
   });
   return newGymClass;
 };
