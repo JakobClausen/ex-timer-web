@@ -1,4 +1,8 @@
-import { GetAllScheduleQuery, ScheduleResponse } from "../generated/graphql";
+import {
+  ClassResponse,
+  GetAllScheduleQuery,
+  ScheduleResponse,
+} from "../generated/graphql";
 
 export interface initialValueInterface {
   Monday: ScheduleResponse;
@@ -10,42 +14,57 @@ export interface initialValueInterface {
   Sunday: ScheduleResponse;
 }
 
-export const initialValue: initialValueInterface = {
+export let initialValue = {
   Monday: {
     day: "Monday",
-    gymClass: [],
+    gymClass: {},
   },
   Tuesday: {
     day: "Tuesday",
-    gymClass: [],
+    gymClass: {},
   },
   Wednesday: {
     day: "Wednesday",
-    gymClass: [],
+    gymClass: {},
   },
   Thursday: {
     day: "Thursday",
-    gymClass: [],
+    gymClass: {},
   },
   Friday: {
     day: "Friday",
-    gymClass: [],
+    gymClass: {},
   },
   Saturday: {
     day: "Saturday",
-    gymClass: [],
+    gymClass: {},
   },
   Sunday: {
     day: "Sunday",
-    gymClass: [],
+    gymClass: {},
   },
 };
 
+const gymClassObj = (gymClass: any) => {
+  let newGymClass = {};
+  gymClass.map((x: any, i: number) => {
+    newGymClass = {
+      ...newGymClass,
+      [i]: {
+        start_time: x.start_time,
+        end_time: x.end_time,
+        category: x.category_id,
+      },
+    };
+  });
+  return newGymClass;
+};
 export const getInitValSchedule = (data: GetAllScheduleQuery | undefined) => {
   if (data) {
     type key = keyof typeof initialValue;
     (Object.keys(initialValue) as Array<key>).map((day: key, i): any => {
-      initialValue[day].gymClass = data.getAllSchedule[i].gymClass;
+      const newGymClass = gymClassObj(data.getAllSchedule[i].gymClass);
+      initialValue[day].gymClass = newGymClass;
       return null;
     });
   }

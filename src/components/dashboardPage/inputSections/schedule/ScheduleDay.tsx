@@ -1,9 +1,7 @@
 import { Box, Button, Text } from "@chakra-ui/core";
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { ScheduleInput } from "./ScheduleInput";
-import formatClasses, {
-  createscheduleClass,
-} from "../../../../utils/formatClasses";
+import { createscheduleClass } from "../../../../utils/formatClasses";
 import { turntoInt } from "../../../../utils/turnstartingValuesToInt";
 
 interface ScheduleDayProps {
@@ -22,15 +20,14 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
   const [startVal, setStartVal] = useState<number[]>(
     turntoInt(Object.keys(scheduleValue[day].gymClass))
   );
-  const [classes, setClasses] = useState<any>(
-    createscheduleClass(scheduleValue[day])
-  );
+  const [classes, setClasses] = useState<any>(scheduleValue[day].gymClass);
+  // createscheduleClass(scheduleValue[day])
 
   useEffect(() => {
-    // const newArray = formatClasses(classes, day);
-    const spread = scheduleValue[day];
-    spread.gymCLass = classes;
-    setScheduleValue({ ...scheduleValue, [day]: spread });
+    setScheduleValue({
+      ...scheduleValue,
+      [day]: { ...scheduleValue[day], gymClass: classes },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [classes]);
 
@@ -53,7 +50,7 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
             initialValues={
               classes[i]
                 ? classes[i]
-                : { start_time: "00:00", end_time: "00:00", category_id: 1 }
+                : { start_time: "00:00", end_time: "00:00", category: 1 }
             }
           />
         );

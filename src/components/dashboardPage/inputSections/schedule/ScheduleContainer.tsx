@@ -8,10 +8,7 @@ import {
 import { DayButton } from "../whiteboard/DayButton";
 import { removeKeys } from "../../../../utils/formatClasses";
 import { Loading } from "../../../loading-error/Loading";
-import {
-  getInitValSchedule,
-  initialValueInterface,
-} from "../../../../utils/getInitValSchedule";
+import { getInitValSchedule } from "../../../../utils/getInitValSchedule";
 
 interface ScheduleContainerProps {}
 
@@ -19,9 +16,7 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const { data, loading } = useGetAllScheduleQuery();
   const [createSchedule] = useCreateScheduleMutation();
   const [displayDay, setDisplayDay] = useState<string>("Monday");
-  const [scheduleValue, setScheduleValue] = useState<any>(
-    getInitValSchedule(data)
-  );
+  const [scheduleValue, setScheduleValue] = useState(getInitValSchedule(data));
 
   const weekDays = [
     "Monday",
@@ -36,12 +31,12 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
   const handleSubmit = async () => {
     const schedule = removeKeys(scheduleValue);
     console.log(schedule);
-
-    // await createSchedule({
-    //   variables: {
-    //     data: { ...schedule },
-    //   },
-    // });
+    const response = await createSchedule({
+      variables: {
+        data: { ...schedule },
+      },
+    });
+    console.log(response);
   };
 
   return (

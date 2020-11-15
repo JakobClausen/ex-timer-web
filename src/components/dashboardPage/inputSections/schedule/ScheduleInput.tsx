@@ -78,7 +78,7 @@ export const ScheduleInput: React.FC<any> = ({
         />
 
         <RadioGroup
-          defaultValue="1"
+          defaultValue={classValues.category}
           onChange={(e) => {
             const spread = { ...classValues };
             spread.category = parseInt(e.target.value);

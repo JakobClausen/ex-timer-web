@@ -246,7 +246,7 @@ export type ScheduleClassInput = {
 
 export type ScheduleInput = {
   day: Scalars['String'];
-  classes: Array<ClassInput>;
+  gymClass: Array<ClassInput>;
 };
 
 export type ClassInput = {

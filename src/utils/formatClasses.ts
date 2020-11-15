@@ -1,20 +1,30 @@
-const formatClasses = (classes: any, day: string) => {
-  const newArray: any = [];
+import { initialValueInterface } from "./getInitValSchedule";
 
-  Object.keys(classes[day]).map((item) => {
-    newArray.push(classes[day][item]);
-    return null;
+// const formatClasses = (classes: any, day: string) => {
+//   const newArray: any = [];
+//   Object.keys(classes[day]).map((item) => {
+//     newArray.push(classes[day][item]);
+//     return null;
+//   });
+
+//   return newArray;
+// };
+
+const makeObjToArray = (gymClass: any) => {
+  const gymClassArray: any = [];
+  type key = keyof typeof gymClass;
+  (Object.keys(gymClass) as Array<key>).map((i: key) => {
+    gymClassArray.push(gymClass[i]);
   });
-
-  return newArray;
+  return gymClassArray;
 };
 
 export const removeKeys = (schedule: any) => {
-  Object.keys(schedule).map((item) => {
-    if (Array.isArray(schedule[item].gymClass)) {
-      delete schedule[item].gymClass;
-    }
-    return null;
+  type key = keyof typeof schedule;
+
+  (Object.keys(schedule) as Array<key>).map((day: key) => {
+    const gymClassArray = makeObjToArray(schedule[day].gymClass);
+    schedule[day].gymClass = gymClassArray;
   });
 
   return schedule;
@@ -27,5 +37,3 @@ export const createscheduleClass = (schedule: any) => {
   }
   return scheduleObj;
 };
-
-export default formatClasses;
