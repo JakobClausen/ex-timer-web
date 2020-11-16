@@ -91,7 +91,7 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
       >
         {({ isSubmitting }) => (
           <Form noValidate>
-            <Grid templateColumns="30% 70%" pr="20px">
+            <Grid templateColumns="20% 80%" pr="20px">
               <Box w="100%">
                 {weekDays.map((day) => {
                   return (
@@ -108,6 +108,7 @@ export const WhiteboardContainer: React.FC<WhiteboardContainerProps> = () => {
                   ml="20px"
                   type="submit"
                   isLoading={isSubmitting}
+                  bg="#1e8dd6"
                 >
                   Save changes
                 </Button>

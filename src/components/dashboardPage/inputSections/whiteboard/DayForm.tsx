@@ -14,7 +14,9 @@ export const DayForm: React.FC<DayFormProps> = ({ day, display }) => {
   }
   return (
     <>
-      <Text fontSize="2xl">{day}</Text>
+      <Text fontSize="2xl" mt="20px">
+        {day}
+      </Text>
       <CategoryField name={`${day}.category`} />
       <Grid templateColumns="33% 33% 33%">
         <RowComponent

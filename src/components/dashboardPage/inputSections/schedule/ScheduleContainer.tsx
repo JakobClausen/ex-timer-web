@@ -82,7 +82,7 @@ export const ScheduleContainer: React.FC<ScheduleContainerProps> = () => {
             onClick={handleSubmit}
             bg="#1e8dd6"
           >
-            Submit changes
+            Save changes
           </Button>
         </Box>
         {loading ? (

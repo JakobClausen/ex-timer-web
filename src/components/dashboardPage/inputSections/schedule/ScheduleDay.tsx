@@ -34,7 +34,9 @@ export const ScheduleDay: React.FC<ScheduleDayProps> = ({
   }
   return (
     <Box w="100%">
-      <Text fontSize="3xl">{display}</Text>
+      <Text fontSize="2xl" mt="20px">
+        {display}
+      </Text>
       {startVal.map((i) => {
         return (
           <ScheduleInput

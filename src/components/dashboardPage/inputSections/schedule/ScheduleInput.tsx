@@ -98,7 +98,7 @@ export const ScheduleInput: React.FC<any> = ({
           <Radio value="1">Crossfit</Radio>
           <Radio value="2">Gymnastics</Radio>
         </RadioGroup>
-        <Text cursor="pointer" color="red.600" mb="0" onClick={handleRemove}>
+        <Text cursor="pointer" color="red.600" m="0" onClick={handleRemove}>
           Remove
         </Text>
       </Flex>

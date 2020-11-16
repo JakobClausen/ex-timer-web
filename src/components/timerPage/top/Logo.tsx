@@ -9,7 +9,7 @@ export const Logo: React.FC<LogoProps> = () => {
   return (
     <Flex justifyContent="center">
       <Link to={"/dashboard"} style={{ cursor: "pointer" }}>
-        <Image src={logo} alt="logo" w="30vw" />
+        <Image src={logo} alt="logo" w="20vw" />
       </Link>
     </Flex>
   );
