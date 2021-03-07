@@ -3,8 +3,8 @@
 Gym hub is an service that digitises the gym environment 
   
 <div>
-  <img src="https://i.ibb.co/z6nYyFs/Screenshot-2020-11-20-at-10-59-13.png" width="400" height="300" alt="Timer">
-  <img src="https://i.ibb.co/jkSR8pQ/Screenshot-2021-03-07-at-18-14-40.png" width="400" height="300" alt="Back office">
+  <img src="https://i.ibb.co/z6nYyFs/Screenshot-2020-11-20-at-10-59-13.png" width="400" height="250" alt="Timer">
+  <img src="https://i.ibb.co/jkSR8pQ/Screenshot-2021-03-07-at-18-14-40.png" width="400" height="250" alt="Back office">
 </div>
 
 ## Installation
