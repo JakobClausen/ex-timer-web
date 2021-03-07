@@ -2,6 +2,8 @@
 
 Gym hub is an service that digitises the gym environment 
 
+![alt text](https://ibb.co/bbWZSF1)
+
 ## Installation
 
 
