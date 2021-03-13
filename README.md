@@ -8,7 +8,7 @@ Gym hub is an service that digitises the gym environment
 </p> 
 
 <p align="center">
-<img src="https://i.ibb.co/jkSR8pQ/Screenshot-2021-03-07-at-18-14-40.png" alt="Class timer by Jakob Clausen" width="738">
+  <img src="https://i.ibb.co/HXHh8q4/backoffice.png" alt="Class timer by Jakob Clausen" width="738">
 </p> 
 
 ## Installation
